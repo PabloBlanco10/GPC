@@ -32,6 +32,7 @@ public:
     void rotarDiabolo();
     void divideViewPort();
     void renderDiaboloWithAxes();
+    void renderCubeWithAxes();
     
 protected:
     Camera & camera;

@@ -56,14 +56,20 @@ Scene::~Scene()
 void Scene::render()
 {
     glMatrixMode(GL_MODELVIEW);
-    
-    auto &it = objetos;
-    it[0]->render(camera.getViewMat());
-    
-//    it[6]->render(camera.getViewMat());
-    it[7]->render(camera.getViewMat());
 
+    //////////////////////////////
+    //      RENDERIZAR OBJETOS
+    ////////////////////////////////
+//    auto &it = objetos;
+//
+//    it[0]->render(camera.getViewMat());
+//    it[7]->render(camera.getViewMat());
     
+    
+    //////////////////////////////
+    //      PARA CUBO CON TAPA
+    //////////////////////////////
+    renderCubeWithAxes();
     
     
     //////////////////////////////
@@ -118,6 +124,16 @@ void Scene::renderDiaboloWithAxes(){
     it[5]->render(camera.getViewMat());
     it[0]->render(camera.getViewMat());
 }
+
+
+//-------------------------------------------------------------------------
+
+void Scene::renderCubeWithAxes(){
+    auto &it = objetos;
+    it[0]->render(camera.getViewMat());
+    it[7]->render(camera.getViewMat());
+}
+
 
 //-------------------------------------------------------------------------
 
