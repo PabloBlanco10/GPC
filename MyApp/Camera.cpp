@@ -1,18 +1,7 @@
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
-//#include "Camera.h"
-//
-//#include <gtc/matrix_transform.hpp>
-//#include <gtc/type_ptr.hpp>
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
 #include "Camera.h"
 
-#include "matrix_transform.hpp"
-#include "type_ptr.hpp"
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 using namespace glm;
 

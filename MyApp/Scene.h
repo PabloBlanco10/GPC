@@ -2,23 +2,10 @@
 #ifndef _H_Scene_H_
 #define _H_Scene_H_
 
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
-//#include <GL/freeglut.h>
-//#include <vector>
-//#include "Camera.h"
-//#include "Entities.h"
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
+#include <GL/freeglut.h>
 #include <vector>
 #include "Camera.h"
 #include "Entities.h"
-
 
 //-------------------------------------------------------------------------
 

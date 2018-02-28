@@ -2,22 +2,9 @@
 #ifndef _H_Mesh_H_
 #define _H_Mesh_H_
 
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
-//#include <GL/freeglut.h>
-//#include <glm.hpp>
+#include <GL/freeglut.h>
+#include <glm.hpp>
 
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-#include <OpenGL/gl.h>
-#include <OpenGL/glu.h>
-
-#include "glm.hpp"
 
 //-------------------------------------------------------------------------
 

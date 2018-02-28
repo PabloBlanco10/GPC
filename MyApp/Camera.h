@@ -2,18 +2,8 @@
 #ifndef _H_Camera_H_
 #define _H_Camera_H_
 
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
-//#include <GL/freeglut.h>
-//#include <glm.hpp>
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
-#include "glm.hpp"
 #include <GL/freeglut.h>
-
+#include <glm.hpp>
 
 
 //-------------------------------------------------------------------------

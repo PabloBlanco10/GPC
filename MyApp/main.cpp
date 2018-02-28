@@ -1,23 +1,13 @@
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
 //#include <Windows.h>
 //#include <gl/GL.h>
 //#include <gl/GLU.h>
 //#include <GL/glut.h>
-//
-//#include <GL/freeglut.h>
-//
-//#include "Camera.h"
-//#include "Scene.h"
 
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
 #include <GL/freeglut.h>
+
 #include "Camera.h"
 #include "Scene.h"
+
 #include <iostream>
 using namespace std;
 

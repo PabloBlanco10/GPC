@@ -1,18 +1,7 @@
-////////////////////////////////
-// CODIGO INICIAL PARA WINDOWS
-////////////////////////////////
-//#include "Entities.h"
-//
-//#include <gtc/matrix_transform.hpp>
-//#include <gtc/type_ptr.hpp>
-
-////////////////////////////////
-// CODIGO PARA MAC
-////////////////////////////////
 #include "Entities.h"
 
-#include "matrix_transform.hpp"
-#include "type_ptr.hpp"
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 
 using namespace glm;
 
@@ -93,11 +82,9 @@ void TriangleRGB::draw()
     glLineWidth(2);
     //sirve para pintar lo de dentro
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    
     mesh->draw();
     glLineWidth(1);
     glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
-    
 }
 
 
@@ -214,12 +201,6 @@ void Cubo::drawMesh()
 void Cubo::drawRectangleMesh()
 {
     glLineWidth(2);
-//    glRotatef(45, 1, 0, 0);
-//    glTranslatef(1, 1.75*height,1);
-
-//    glTranslatef(1, 1, -(height/2) * cos(45));
-    
-//    glTranslatef(0, 0, -(height/2));
     rectangleMesh->draw();
     glLineWidth(1);
 }
@@ -227,21 +208,15 @@ void Cubo::drawRectangleMesh()
 void Cubo::render(const glm::dmat4 &modelViewMat){
     
     glMatrixMode(GL_MODELVIEW);
-//    dmat4 aMat = modelViewMat * modelMat;
     glPolygonMode(GL_FRONT, GL_LINE);
-//    glPolygonMode(GL_BACK, GL_POINT);
-
+    glPolygonMode(GL_BACK, GL_POINT);
     drawMesh();
-    
-    
+
     dmat4 aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,height*0.85,0));
     aMat = translate(aMat ,dvec3(0,0,-(height*0.15)));
     aMat = rotate(aMat, radians(45.0), dvec3(1.0,0.0,0.0));
 
-    
     glLoadMatrixd(value_ptr(aMat));
     drawRectangleMesh();
-//    glLoadMatrixd(value_ptr(modelMat));
-
 }
