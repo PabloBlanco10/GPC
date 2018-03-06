@@ -8,6 +8,9 @@ void Scene::init()
     glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
     glEnable(GL_DEPTH_TEST);
     
+    
+    glEnable(GL_TEXTURE_2D);
+    
     camera.setAZ();
     
     // lights

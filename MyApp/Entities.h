@@ -6,6 +6,7 @@
 #include <glm.hpp>
 
 #include "Mesh.h"
+#include "Texture.h"
 
 //-------------------------------------------------------------------------
 
@@ -22,6 +23,7 @@ protected:
     glm::dmat4 modelMat;
     virtual void draw();
     virtual void setMvM(glm::dmat4 const& modelViewMat);
+    Texture *texture = nullptr;
 };
 
 //-------------------------------------------------------------------------

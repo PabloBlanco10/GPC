@@ -170,7 +170,9 @@ void Diabolo::rotateDiabolo(){
 
 Rectangle::Rectangle(GLdouble w,GLdouble h): Entity()
 {
-    mesh = Mesh::generateRectangle(w, h);
+//    mesh = Mesh::generateRectangle(w, h);
+    mesh = Mesh::generateRectangleTex(w, h);
+
 }
 //-------------------------------------------------------------------------
 

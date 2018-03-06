@@ -26,6 +26,10 @@ void Mesh::draw()
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
     }
+    if(texCoords != nullptr){
+        glEnableClientState(GL_TEXTURE_COORD_ARRAY);
+        glTexCoordPointer(2, GL_DOUBLE, 0, texCoords);
+    }
 }
 //-------------------------------------------------------------------------
 
@@ -217,5 +221,14 @@ Mesh * Mesh::generateRectangle(GLdouble w,GLdouble h){
     
     return m;
 }
+
+Mesh * Mesh::generateRectangleTex(GLdouble w,GLdouble h){
+    
+    Mesh *m = generateRectangle(w, h);
+    m->texCoords = new dvec2[m->numVertices]; m->texCoords[0] = dvec2(0, 1); m->texCoords[1] = dvec2(0, 0); m->texCoords[2] = dvec2(1, 1); m->texCoords[3] = dvec2(1, 0);
+    return m;
+    
+}
+
 
 
