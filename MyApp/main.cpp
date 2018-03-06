@@ -17,10 +17,10 @@ using namespace std;
 Viewport viewPort(800, 600);   
 
 // Camera position, view volume and projection
-Camera camera(viewPort);    
+Camera camera(&viewPort);
 
 // Scene entities
-Scene scene(camera);   
+Scene scene(camera);
 
 //----------- Callbacks ----------------------------------------------------
 

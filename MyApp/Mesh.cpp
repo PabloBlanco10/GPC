@@ -226,6 +226,7 @@ Mesh * Mesh::generateRectangleTex(GLdouble w,GLdouble h){
     
     Mesh *m = generateRectangle(w, h);
     m->texCoords = new dvec2[m->numVertices]; m->texCoords[0] = dvec2(0, 1); m->texCoords[1] = dvec2(0, 0); m->texCoords[2] = dvec2(1, 1); m->texCoords[3] = dvec2(1, 0);
+//    texture.load("..\\Bmps\\Zelda.bmp"); // cargamos la imagen
     return m;
     
 }

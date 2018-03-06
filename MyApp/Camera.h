@@ -31,11 +31,11 @@ protected:
 
 class Camera {
 public:
-    Camera(Viewport& avp) : vp(avp), viewMat(1.0), projMat(1.0),
-    xRight(avp.getW() / 2.0), xLeft(-xRight), yTop(avp.getH() / 2.0), yBot(-yTop)
+    Camera(Viewport* avp) : vp(avp), viewMat(1.0), projMat(1.0),
+    xRight(avp->getW() / 2.0), xLeft(-xRight), yTop(avp->getH() / 2.0), yBot(-yTop)
     { };
     ~Camera() {};
-    Viewport& getVP() { return vp; }
+    Viewport* getVP() { return vp; }
     
     // view matrix
     glm::dmat4 const& getViewMat() { return viewMat; };
@@ -67,7 +67,7 @@ protected:
     GLdouble factScale = 1;
     glm::dmat4 projMat;
     
-    Viewport& vp;
+    Viewport* vp;
     
     void setVM();
     void setPM();

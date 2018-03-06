@@ -9,12 +9,13 @@ void Scene::init()
     glEnable(GL_DEPTH_TEST);
     
     
-    glEnable(GL_TEXTURE_2D);
     
     camera.setAZ();
     
     // lights
     // textures
+    glEnable(GL_TEXTURE_2D);
+
     
     // objets
     
@@ -63,30 +64,30 @@ void Scene::render()
     //////////////////////////////
     //      RENDERIZAR OBJETOS
     ////////////////////////////////
-//    auto &it = objetos;
-//
-//    it[0]->render(camera.getViewMat());
+    auto &it = objetos;
+
+    it[6]->render(camera.getViewMat());
 //    it[7]->render(camera.getViewMat());
     
     
     //////////////////////////////
     //      PARA CUBO CON TAPA
     //////////////////////////////
-    renderCubeWithAxes();
+//    renderCubeWithAxes();
     
     
     //////////////////////////////
     //      PARA DIABOLO CON EJES
     //////////////////////////////
     
-    //    renderDiaboloWithAxes();
+//        renderDiaboloWithAxes();
     
     
     //////////////////////////////
     //    PARA DIVIDIR EN 4 EL PUERTO DE VISTA
     //////////////////////////////
     
-    //    divideViewPort();
+//        divideViewPort();
     
     
     //////////////////////////////
@@ -142,7 +143,7 @@ void Scene::renderCubeWithAxes(){
 
 void Scene::divideViewPort(){
     auto &it = objetos;
-    Viewport viewport = camera.getVP();
+    Viewport viewport = *camera.getVP();
     viewport.setSize(400, 300);
     
     viewport.setPos(0, 0);
