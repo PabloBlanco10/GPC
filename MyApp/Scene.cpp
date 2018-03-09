@@ -20,13 +20,13 @@ void Scene::init()
     // objets
     
     //0
-    objetos.push_back(new EjesRGB(500));
-    objetos.push_back(new Triangle(200.0));
-    objetos.push_back(new TriangleRGB(200.0));
-    objetos.push_back(new TriPyramid(200.0, 300.0));
-    objetos.push_back(new ContCubo(200.0));
-    //5
-    objetos.push_back(new Diabolo(200.0, 300.0));
+//    objetos.push_back(new EjesRGB(500));
+//    objetos.push_back(new Triangle(200.0));
+//    objetos.push_back(new TriangleRGB(200.0));
+//    objetos.push_back(new TriPyramid(200.0, 300.0));
+//    objetos.push_back(new ContCubo(200.0));
+//    //5
+//    objetos.push_back(new Diabolo(200.0, 300.0));
     objetos.push_back(new Rectangulo(200.0, 200.0));
     objetos.push_back(new Cubo(200.0));
 
@@ -66,7 +66,7 @@ void Scene::render()
     ////////////////////////////////
     auto &it = objetos;
 
-    it[6]->render(camera.getViewMat());
+    it[0]->render(camera.getViewMat());
 //    it[7]->render(camera.getViewMat());
     
     

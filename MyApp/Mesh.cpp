@@ -26,10 +26,9 @@ void Mesh::draw()
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
     }
-    if(texCoords != nullptr){
         glEnableClientState(GL_TEXTURE_COORD_ARRAY);
         glTexCoordPointer(2, GL_DOUBLE, 0, texCoords);
-    }
+    
 }
 //-------------------------------------------------------------------------
 
@@ -120,7 +119,7 @@ Mesh * Mesh::generateTriPyramid(GLdouble r,GLdouble h){
     m->vertices[4] = dvec3(r*cos(radians(valor)),r* sin(radians(valor)) , 0.0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     //quitamos los colores para pintar el diabolo
     //    m->colors = new dvec4[m->numVertices];
@@ -152,8 +151,6 @@ Mesh * Mesh::generateContCubo(GLdouble l){
     m->vertices[8] = dvec3(-(l/2), l/2, l/2);
     m->vertices[9] = dvec3(-(l/2), -(l/2), l/2);
     
-    //sirve para pintar solo las lineas y dibujarlo vacio
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     m->colors = new dvec4[m->numVertices];
     m->colors[0] = dvec4(1.0, 0.0, 0.0, 1.0);
@@ -185,7 +182,7 @@ Mesh * Mesh::generateDiabolo(GLdouble r,GLdouble h){
     m->vertices[4] = dvec3(r*cos(radians(valor)),r* sin(radians(valor)) , 0.0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     m->colors = new dvec4[m->numVertices];
     m->colors[0] = dvec4(1.0, 0.0, 0.0, 1.0);
@@ -211,7 +208,7 @@ Mesh * Mesh::generateRectangulo(GLdouble w,GLdouble h){
     m->vertices[3] = dvec3(w/2, h/2, 0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
-    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     m->colors = new dvec4[m->numVertices];
     m->colors[0] = dvec4(1.0, 0.0, 0.0, 1.0);

@@ -171,14 +171,17 @@ void Diabolo::rotateDiabolo(){
 Rectangulo::Rectangulo(GLdouble w,GLdouble h): Entity()
 {
 //    mesh = Mesh::generateRectangle(w, h);
+
     mesh = Mesh::generateRectanguloTex(w, h);
-    texture.load("Zelda.bmp");
+    texture.load("Bmps/container.bmp");
 }
 //-------------------------------------------------------------------------
 
 void Rectangulo::draw()
 {
 //    glLineWidth(2);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
     texture.bind();
     mesh->draw();
     texture.unbind();
@@ -190,6 +193,7 @@ void Rectangulo::draw()
 
 Cubo::Cubo(GLdouble h): Entity()
 {
+    
     mesh = Mesh::generateContCubo(h);
     height = h;
     rectanguloMesh = Mesh::generateRectangulo(h, h);
@@ -214,6 +218,7 @@ void Cubo::render(const glm::dmat4 &modelViewMat){
     glMatrixMode(GL_MODELVIEW);
     glPolygonMode(GL_FRONT, GL_LINE);
     glPolygonMode(GL_BACK, GL_POINT);
+    
     drawMesh();
 
     dmat4 aMat = modelViewMat * modelMat;
@@ -223,4 +228,6 @@ void Cubo::render(const glm::dmat4 &modelViewMat){
 
     glLoadMatrixd(value_ptr(aMat));
     drawRectanguloMesh();
+    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
 }
