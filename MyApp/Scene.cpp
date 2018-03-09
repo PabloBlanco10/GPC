@@ -27,7 +27,7 @@ void Scene::init()
     objetos.push_back(new ContCubo(200.0));
     //5
     objetos.push_back(new Diabolo(200.0, 300.0));
-    objetos.push_back(new Rectangle(200.0, 200.0));
+    objetos.push_back(new Rectangulo(200.0, 200.0));
     objetos.push_back(new Cubo(200.0));
 
     

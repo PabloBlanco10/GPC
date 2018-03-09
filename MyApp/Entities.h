@@ -23,7 +23,7 @@ protected:
     glm::dmat4 modelMat;
     virtual void draw();
     virtual void setMvM(glm::dmat4 const& modelViewMat);
-    Texture *texture = nullptr;
+    Texture texture;
 };
 
 //-------------------------------------------------------------------------
@@ -81,11 +81,11 @@ public:
     virtual void rotateDiabolo();
 };
 
-class Rectangle : public Entity
+class Rectangulo : public Entity
 {
 public:
-    Rectangle(GLdouble w, GLdouble h);
-    ~Rectangle() { };
+    Rectangulo(GLdouble w, GLdouble h);
+    ~Rectangulo() { };
     virtual void draw();
 };
 
@@ -96,11 +96,11 @@ public:
     Cubo(GLdouble h);
     ~Cubo() { };
     virtual void drawMesh();
-    virtual void drawRectangleMesh();
+    virtual void drawRectanguloMesh();
     virtual void render(glm::dmat4 const& modelViewMat);
     
 protected:
-    Mesh* rectangleMesh = nullptr;
+    Mesh* rectanguloMesh = nullptr;
     GLdouble height;
 };
 
