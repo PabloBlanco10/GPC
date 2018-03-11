@@ -17,7 +17,7 @@ void Entity::render(dmat4 const& modelViewMat)
 void Entity::draw() 
 { 
     if (mesh != nullptr)
-        mesh -> draw();
+        mesh->draw();
 }
 //-------------------------------------------------------------------------
 
@@ -92,15 +92,20 @@ void TriangleRGB::draw()
 
 TriPyramid::TriPyramid(GLdouble r,GLdouble h): Entity()
 {
-    mesh = Mesh::generateTriPyramid(r, h);
+    mesh = Mesh::generateTriPyramidTex(r, h);
+    //    mesh = Mesh::generateTriPyramid(r, h);
+    texture.load("Bmps/floris.bmp");
 }
-//-------------------------------------------------------------------------
+//-------------generateTriPyramid---------------------------------------
 
 void TriPyramid::draw()
 {
-    glLineWidth(2);
+    
+    //    glLineWidth(2);
+    texture.bind();
     mesh->draw();
-    glLineWidth(1);
+    texture.unbind();
+    //    glLineWidth(1);
 }
 
 //-------------------------------------------------------------------------
@@ -122,41 +127,47 @@ void ContCubo::draw()
 
 Diabolo::Diabolo(GLdouble r,GLdouble h): Entity()
 {
-    mesh = Mesh::generateTriPyramid(r, 400);
+    mesh = Mesh::generateTriPyramidTex(r, 400);
+    texture.load("Bmps/floris.bmp");
 }
 //-------------------------------------------------------------------------
 
 void Diabolo::draw()
 {
-    glLineWidth(2);
+    //    glLineWidth(2);
+//    glEnable(GL_TEXTURE_2D);
+    
+    texture.bind();
     mesh->draw();
-    glLineWidth(1);
+    texture.unbind();
+    //    glLineWidth(1);
 }
 
 void Diabolo::render(const glm::dmat4 &modelViewMat){
+    
     glMatrixMode(GL_MODELVIEW);
     dmat4 aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,0,-400));
     
     glLoadMatrixd(value_ptr(aMat));
-    glColor3d(0.0, 0.0, 0.0);
+    //    glColor3d(0.0, 0.0, 0.0);
     draw();
     
     aMat = rotate(aMat, radians(180.0), dvec3(0.0, 0.0, 1.0));
     glLoadMatrixd(value_ptr(aMat));
-    glColor3d(1.0, 0.0, 0.0);
+    //    glColor3d(1.0, 0.0, 0.0);
     draw();
     
     aMat = modelViewMat * modelMat;
     aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
     aMat = translate(aMat ,dvec3(0,0,-400));
     glLoadMatrixd(value_ptr(aMat));
-    glColor3d(0.0, 0.0, 1.0);
+    //    glColor3d(0.0, 0.0, 1.0);
     draw();
     
     aMat = rotate(aMat, radians(180.0), dvec3(0.0, 0.0, 1.0));
     glLoadMatrixd(value_ptr(aMat));
-    glColor3d(0.0, 1.0, 0.0);
+    //    glColor3d(0.0, 1.0, 0.0);
     draw();
 }
 
@@ -170,8 +181,8 @@ void Diabolo::rotateDiabolo(){
 
 Rectangulo::Rectangulo(GLdouble w,GLdouble h): Entity()
 {
-//    mesh = Mesh::generateRectangle(w, h);
-
+    //    mesh = Mesh::generateRectangle(w, h);
+    
     mesh = Mesh::generateRectanguloTex(w, h);
     texture.load("Bmps/container.bmp");
 }
@@ -179,13 +190,13 @@ Rectangulo::Rectangulo(GLdouble w,GLdouble h): Entity()
 
 void Rectangulo::draw()
 {
-//    glLineWidth(2);
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+    //    glLineWidth(2);
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    
     texture.bind();
     mesh->draw();
     texture.unbind();
-//    glLineWidth(1);
+    //    glLineWidth(1);
 }
 
 //-------------------------------------------------------------------------
@@ -220,14 +231,14 @@ void Cubo::render(const glm::dmat4 &modelViewMat){
     glPolygonMode(GL_BACK, GL_POINT);
     
     drawMesh();
-
+    
     dmat4 aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,height*0.85,0));
     aMat = translate(aMat ,dvec3(0,0,-(height*0.15)));
     aMat = rotate(aMat, radians(45.0), dvec3(1.0,0.0,0.0));
-
+    
     glLoadMatrixd(value_ptr(aMat));
     drawRectanguloMesh();
     glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+    
 }

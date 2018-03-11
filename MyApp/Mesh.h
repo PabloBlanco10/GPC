@@ -15,8 +15,8 @@ public:
     static Mesh * generateTriangle(GLdouble r);
     static Mesh * generateTriangleRGB(GLdouble r);
     static Mesh * generateTriPyramid(GLdouble r,GLdouble h);
+    static Mesh * generateTriPyramidTex(GLdouble r,GLdouble h);
     static Mesh * generateContCubo(GLdouble l);
-    static Mesh * generateDiabolo(GLdouble r,GLdouble h);
     static Mesh * generateRectangulo(GLdouble w,GLdouble h);
     static Mesh * generateRectanguloTex(GLdouble w,GLdouble h);
     
