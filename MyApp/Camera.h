@@ -53,6 +53,7 @@ public:
     void setSize(GLdouble aw, GLdouble ah);
     void scale(GLdouble s);
     
+    void rotateMesh();
     
 protected:
     glm::dvec3 eye = { 0.0, 0.0, 500.0 };

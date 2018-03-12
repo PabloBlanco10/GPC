@@ -38,7 +38,7 @@ void Camera::setAZ()
     up= dvec3(0, 1, 0);
     viewMat = lookAt(eye, look, up);
     setVM();
-//    setPM();
+    setPM();
 }
 //-------------------------------------------------------------------------
 
