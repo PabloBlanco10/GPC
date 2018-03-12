@@ -20,7 +20,7 @@ Viewport viewPort(800, 600);
 Camera camera(&viewPort);
 
 // Scene entities
-Scene scene(camera);
+Scene scene(&camera);
 
 //----------- Callbacks ----------------------------------------------------
 
