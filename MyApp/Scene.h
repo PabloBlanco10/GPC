@@ -12,7 +12,7 @@
 class Scene	
 { 
 public:
-    Scene(Camera & cam): camera(cam) { };
+    Scene(Camera * cam): camera(cam) { };
     ~Scene();
     void init();
     void render();
@@ -22,7 +22,7 @@ public:
     void renderCubeWithAxes();
     
 protected:
-    Camera & camera;
+    Camera * camera;
     std::vector<Entity*> objetos;
 };
 
