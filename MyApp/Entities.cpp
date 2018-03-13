@@ -94,7 +94,9 @@ TriPyramid::TriPyramid(GLdouble r,GLdouble h): Entity()
 {
     mesh = Mesh::generateTriPyramidTex(r, h);
     //    mesh = Mesh::generateTriPyramid(r, h);
-    texture.load("Bmps/floris.bmp");
+    //texture.load("Bmps/floris.bmp");
+	texture.load("..\\Bmps\\floris.bmp");
+
 }
 //-------------generateTriPyramid---------------------------------------
 
@@ -128,7 +130,8 @@ void ContCubo::draw()
 Diabolo::Diabolo(GLdouble r,GLdouble h): Entity()
 {
     mesh = Mesh::generateTriPyramidTex(r, 400);
-    texture.load("Bmps/floris.bmp");
+    //texture.load("Bmps/floris.bmp");
+	texture.load("..\\Bmps\\floris.bmp");
 }
 //-------------------------------------------------------------------------
 
@@ -144,7 +147,6 @@ void Diabolo::draw()
 }
 
 void Diabolo::render(const glm::dmat4 &modelViewMat){
-    
     glMatrixMode(GL_MODELVIEW);
     dmat4 aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,0,-400));
@@ -181,22 +183,24 @@ void Diabolo::rotateDiabolo(){
 
 Rectangulo::Rectangulo(GLdouble w,GLdouble h): Entity()
 {
-    //    mesh = Mesh::generateRectangle(w, h);
-    
+//    mesh = Mesh::generateRectangle(w, h);
+
     mesh = Mesh::generateRectanguloTex(w, h);
-    texture.load("Bmps/container.bmp");
+    //texture.load("Bmps/container.bmp");
+	texture.load("..\\Bmps\\container.bmp");
+
 }
 //-------------------------------------------------------------------------
 
 void Rectangulo::draw()
 {
-    //    glLineWidth(2);
-    //    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    
+//    glLineWidth(2);
+//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+
     texture.bind();
     mesh->draw();
     texture.unbind();
-    //    glLineWidth(1);
+//    glLineWidth(1);
 }
 
 //-------------------------------------------------------------------------
@@ -206,15 +210,21 @@ Cubo::Cubo(GLdouble h): Entity()
 {
     
     mesh = Mesh::generateContCubo(h);
-    height = h;
+	mesh = Mesh::generateCuboTex(h);
+	//mesh = Mesh::generateRectanguloTex(h, h);
+	//texture.load("Bmps/container.bmp");
+	texture.load("..\\Bmps\\container.bmp");
+    //height = h;
     rectanguloMesh = Mesh::generateRectangulo(h, h);
 }
 
 void Cubo::drawMesh()
 {
-    glLineWidth(2);
+	texture.bind();
+    //glLineWidth(2);
     mesh->draw();
-    glLineWidth(1);
+	texture.unbind();
+   // glLineWidth(1);
 }
 
 void Cubo::drawRectanguloMesh()
@@ -227,18 +237,18 @@ void Cubo::drawRectanguloMesh()
 void Cubo::render(const glm::dmat4 &modelViewMat){
     
     glMatrixMode(GL_MODELVIEW);
-    glPolygonMode(GL_FRONT, GL_LINE);
-    glPolygonMode(GL_BACK, GL_POINT);
+    //glPolygonMode(GL_FRONT, GL_LINE);
+    //glPolygonMode(GL_BACK, GL_POINT);
     
     drawMesh();
-    
+
     dmat4 aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,height*0.85,0));
     aMat = translate(aMat ,dvec3(0,0,-(height*0.15)));
     aMat = rotate(aMat, radians(45.0), dvec3(1.0,0.0,0.0));
-    
+
     glLoadMatrixd(value_ptr(aMat));
-    drawRectanguloMesh();
-    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-    
+    //drawRectanguloMesh();
+    glPolygonMode(GL_FRONT, GL_FILL);
+
 }
