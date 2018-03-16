@@ -182,6 +182,24 @@ Mesh * Mesh::generateContCubo(GLdouble l){
     return m;
 }
 
+Mesh * Mesh::generateCuboTex(GLdouble l) {
+    
+    Mesh *m = generateContCubo(l);
+    m->texCoords = new dvec2[m->numVertices];
+    m->texCoords[0] = dvec2(0, 1);
+    m->texCoords[1] = dvec2(0, 0);
+    m->texCoords[2] = dvec2(1, 1);
+    m->texCoords[3] = dvec2(1, 0);
+    m->texCoords[4] = dvec2(2, 1);
+    m->texCoords[5] = dvec2(2, 0);
+    m->texCoords[6] = dvec2(3, 1);
+    m->texCoords[7] = dvec2(3, 0);
+    m->texCoords[8] = dvec2(4, 1);
+    m->texCoords[9] = dvec2(4, 0);
+    return m;
+    
+}
+
 Mesh * Mesh::generateRectangulo(GLdouble w,GLdouble h){
     
     Mesh *m = new Mesh();
@@ -206,34 +224,18 @@ Mesh * Mesh::generateRectangulo(GLdouble w,GLdouble h){
     return m;
 }
 
-Mesh * Mesh::generateRectanguloTex(GLdouble w,GLdouble h){
+Mesh * Mesh::generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH){
     
     Mesh *m = generateRectangulo(w, h);
     m->texCoords = new dvec2[m->numVertices];
-    m->texCoords[0] = dvec2(0, 1);
+    m->texCoords[0] = dvec2(0, 1*replicaH);
     m->texCoords[1] = dvec2(0, 0);
-    m->texCoords[2] = dvec2(1, 1);
-    m->texCoords[3] = dvec2(1, 0);
+    m->texCoords[2] = dvec2(1*replicaW, 1*replicaH);
+    m->texCoords[3] = dvec2(1*replicaW, 0);
     return m;
     
 }
 
-Mesh * Mesh::generateCuboTex(GLdouble l) {
 
-	Mesh *m = generateContCubo(l);
-	m->texCoords = new dvec2[m->numVertices];
-	m->texCoords[0] = dvec2(0, 1);
-	m->texCoords[1] = dvec2(0, 0);
-	m->texCoords[2] = dvec2(1, 1);
-	m->texCoords[3] = dvec2(1, 0);
-	m->texCoords[4] = dvec2(2, 1);
-	m->texCoords[5] = dvec2(2, 0);
-	m->texCoords[6] = dvec2(3, 1);
-	m->texCoords[7] = dvec2(3, 0);
-	m->texCoords[8] = dvec2(0, 1);
-	m->texCoords[9] = dvec2(0, 0);
-	return m;
-
-}
 
 

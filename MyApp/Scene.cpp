@@ -21,15 +21,18 @@ void Scene::init()
     // objets
     
     //0
-    objetos.push_back(new EjesRGB(500));
-//    objetos.push_back(new Triangle(200.0));
-//    objetos.push_back(new TriangleRGB(200.0));
-//    objetos.push_back(new TriPyramid(200.0, 300.0));
-    //objetos.push_back(new ContCubo(200.0));
+    objetos.push_back(new EjesRGB(350));
+    objetos.push_back(new Triangle(200.0));
+    objetos.push_back(new TriangleRGB(200.0));
+    objetos.push_back(new TriPyramid(200.0, 300.0));
+    objetos.push_back(new ContCubo(200.0));
 //    //5
-    objetos.push_back(new Diabolo(200.0, 300.0));
-    objetos.push_back(new Rectangulo(200.0, 200.0));
-	objetos.push_back(new Cubo(200.0));
+    objetos.push_back(new Diabolo(100.0, 150.0));
+    objetos.push_back(new Rectangulo(200.0, 200.0, 0, 0));
+    objetos.push_back(new Suelo(1000.0, 1000.0));
+    objetos.push_back(new Cubo(200.0));
+
+
 
     
 }
@@ -65,18 +68,21 @@ void Scene::render()
 	//////////////////////////////
 	//      RENDERIZAR OBJETOS
 	////////////////////////////////
-	auto &it = objetos
-		;
-	//
-	/*it[0]->render(camera->getViewMat());
-	it[1]->render(camera->getViewMat());
-	it[2]->render(camera->getViewMat());*/
+//    auto &it = objetos;
+//    //
+//    it[0]->render(camera->getViewMat());
+//    it[8]->render(camera->getViewMat());
+//    it[7]->render(camera->getViewMat());
 
+    //////////////////////////////
+    //      PARA PRACTICA1
+    //////////////////////////////
+            renderScenario();
 
 	//////////////////////////////
 	//      PARA CUBO CON TAPA
 	//////////////////////////////
-	//    renderCubeWithAxes();
+//        renderCubeWithAxes();
 
 
 	//////////////////////////////
@@ -90,7 +96,7 @@ void Scene::render()
 	//    PARA DIVIDIR EN 4 EL PUERTO DE VISTA
 	//////////////////////////////
 
-	        divideViewPort();
+//            divideViewPort();
 
 
 	//////////////////////////////
@@ -124,6 +130,18 @@ void Scene::rotarDiabolo(){
     }
 }
 
+
+//-------------------------------------------------------------------------
+
+void Scene::renderScenario(){
+    auto &it = objetos;
+    it[0]->render(camera->getViewMat());
+    it[8]->render(camera->getViewMat());
+    it[7]->render(camera->getViewMat());
+    it[5]->render(camera->getViewMat());
+}
+
+
 //-------------------------------------------------------------------------
 
 void Scene::renderDiaboloWithAxes(){
@@ -138,7 +156,7 @@ void Scene::renderDiaboloWithAxes(){
 void Scene::renderCubeWithAxes(){
     auto &it = objetos;
     it[0]->render(camera->getViewMat());
-    //it[7]->render(camera->getViewMat());//
+    it[7]->render(camera->getViewMat());//
 }
 
 

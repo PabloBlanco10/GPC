@@ -79,12 +79,14 @@ public:
     virtual void draw();
     virtual void render(glm::dmat4 const& modelViewMat);
     virtual void rotateDiabolo();
+protected:
+    GLdouble height;
 };
 
 class Rectangulo : public Entity
 {
 public:
-    Rectangulo(GLdouble w, GLdouble h);
+    Rectangulo(GLdouble w, GLdouble h, GLdouble replicaW, GLdouble replicaH);
     ~Rectangulo() { };
     virtual void draw();
 };
@@ -102,6 +104,15 @@ public:
 protected:
     Mesh* rectanguloMesh = nullptr;
     GLdouble height;
+};
+
+
+class Suelo : public Entity
+{
+public:
+    Suelo(GLdouble w, GLdouble h);
+    ~Suelo() { };
+    virtual void draw();
 };
 
 //-------------------------------------------------------------------------

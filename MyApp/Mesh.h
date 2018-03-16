@@ -19,7 +19,7 @@ public:
     static Mesh * generateContCubo(GLdouble l);
     //static Mesh * generateDiabolo(GLdouble r,GLdouble h);
     static Mesh * generateRectangulo(GLdouble w,GLdouble h);
-    static Mesh * generateRectanguloTex(GLdouble w,GLdouble h);
+    static Mesh * generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH);
 	static Mesh * generateCuboTex(GLdouble l);
     
     Mesh(void) { };

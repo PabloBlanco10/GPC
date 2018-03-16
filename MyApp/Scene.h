@@ -20,6 +20,8 @@ public:
     void divideViewPort();
     void renderDiaboloWithAxes();
     void renderCubeWithAxes();
+    void renderScenario();
+
     
 protected:
     Camera * camera;
