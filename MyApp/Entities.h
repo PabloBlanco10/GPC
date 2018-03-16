@@ -99,11 +99,13 @@ public:
     ~Cubo() { };
     virtual void drawMesh();
     virtual void drawRectanguloMesh();
+    virtual void drawMeshIn();
     virtual void render(glm::dmat4 const& modelViewMat);
     
 protected:
     Mesh* rectanguloMesh = nullptr;
     GLdouble height;
+    Texture textureIn;
 };
 
 

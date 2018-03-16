@@ -93,6 +93,9 @@ void resize(int newWidth, int newHeight)
 void key(unsigned char key, int x, int y)
 {
     bool need_redisplay = true;
+    Texture texture;
+    int w = glutGet(GLUT_WINDOW_WIDTH);
+    int h = glutGet(GLUT_WINDOW_HEIGHT);
     
     switch (key) {
         case 27:  // Escape key
@@ -112,6 +115,10 @@ void key(unsigned char key, int x, int y)
             break;
         case 'a':
             scene.rotarDiabolo();
+            break;
+        case 'F':
+            texture.loadColorBuffer(w, h);
+            texture.save("prueba");
             break;
         default:
             need_redisplay = false;

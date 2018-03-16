@@ -42,3 +42,23 @@ bool Texture:: load(const std::string & BMP_Name, GLubyte alpha) {
     
     return false;
 }
+
+bool Texture:: loadColorBuffer(GLsizei width, GLsizei height){
+    if (id == 0) init();
+    w = width;
+    h = height;
+    glReadBuffer(GL_FRONT);
+    glBindTexture(GL_TEXTURE_2D, id);
+    glCopyTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, 0, 0, width, height, 0);
+    return false;
+}
+
+
+bool Texture:: save(const std::string & BMP_Name){
+    PixMap32RGBA pixMap; // var. local para cargar la imagen del archivo
+    pixMap.create_pixmap(w, h);
+    glBindTexture(GL_TEXTURE_2D, id);
+    glGetTexImage(GL_TEXTURE_2D, 0, GL_RGBA, GL_UNSIGNED_BYTE, pixMap.data());
+    pixMap.save_bmp24BGR("/Users/pabloblanco/Downloads/save.bmp");
+    return false;
+}

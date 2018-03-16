@@ -29,10 +29,8 @@ void Scene::init()
 //    //5
     objetos.push_back(new Diabolo(100.0, 150.0));
     objetos.push_back(new Rectangulo(200.0, 200.0, 0, 0));
-    objetos.push_back(new Suelo(1000.0, 1000.0));
+    objetos.push_back(new Suelo(1200.0, 1200.0));
     objetos.push_back(new Cubo(200.0));
-
-
 
     
 }

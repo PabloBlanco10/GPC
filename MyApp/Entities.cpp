@@ -129,7 +129,8 @@ void ContCubo::draw()
 
 Diabolo::Diabolo(GLdouble r,GLdouble h): Entity()
 {
-    modelMat = translate(modelMat, dvec3(300,0,0));
+    modelMat = translate(modelMat, dvec3(250,0,-150));
+    modelMat = rotate(modelMat, radians(30.0), dvec3(0,1,0));
     height = h;
     mesh = Mesh::generateTriPyramidTex(r, h);
     texture.load("Bmps/floris.bmp");
@@ -138,13 +139,10 @@ Diabolo::Diabolo(GLdouble r,GLdouble h): Entity()
 //-------------------------------------------------------------------------
 
 void Diabolo::draw()
-{
-    //    glLineWidth(2);
-    
+{    
     texture.bind();
     mesh->draw();
     texture.unbind();
-    //    glLineWidth(1);
 }
 
 void Diabolo::render(const glm::dmat4 &modelViewMat){
@@ -184,7 +182,6 @@ void Diabolo::rotateDiabolo(){
 
 Rectangulo::Rectangulo(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH): Entity()
 {
-//    mesh = Mesh::generateRectangle(w, h);
 
     mesh = Mesh::generateRectanguloTex(w, h, 0, 0);
     texture.load("Bmps/container.bmp");
@@ -195,13 +192,11 @@ Rectangulo::Rectangulo(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replic
 
 void Rectangulo::draw()
 {
-//    glLineWidth(2);
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
 
     texture.bind();
     mesh->draw();
     texture.unbind();
-//    glLineWidth(1);
 }
 
 //-------------------------------------------------------------------------
@@ -209,55 +204,52 @@ void Rectangulo::draw()
 
 Cubo::Cubo(GLdouble h): Entity()
 {
-//    modelMat = translate(modelMat, dvec3(0,h/2,0));
-    texture.load("Bmps/container.bmp");
-	mesh = Mesh::generateCuboTex(h);
-	//mesh = Mesh::generateRectanguloTex(h, h);
-//    texture.load("..\\Bmps\\container.bmp");
     height = h;
+    modelMat = translate(modelMat, dvec3(-height/2,0,0));
+    texture.load("Bmps/container.bmp");
+    textureIn.load("Bmps/chuches.bmp");
+//    texture.load("..\\Bmps\\container.bmp");
+    mesh = Mesh::generateCuboTex(h);
     rectanguloMesh = Mesh::generateRectanguloTex(h, h, 1, 1);
-    
 }
 
 void Cubo::drawMesh()
 {
 	texture.bind();
-    //glLineWidth(2);
     mesh->draw();
 	texture.unbind();
-    texture.load("Bmps/container.bmp");
-
-   // glLineWidth(1);
 }
 
 void Cubo::drawRectanguloMesh()
 {
-//    glLineWidth(2);
     texture.bind();
     rectanguloMesh->draw();
     texture.unbind();
+}
 
-//    glLineWidth(1);
+void Cubo::drawMeshIn()
+{
+    textureIn.bind();
+    mesh->draw();
+    textureIn.unbind();
 }
 
 void Cubo::render(const glm::dmat4 &modelViewMat){
-    
-    //para poner textura por dentro y por fuera
     glMatrixMode(GL_MODELVIEW);
+    dmat4 aMat = modelViewMat * modelMat;
+    glLoadMatrixd(value_ptr(aMat));
+    //para poner textura por dentro y por fuera
     glEnable(GL_CULL_FACE);
     glPolygonMode(GL_FRONT, GL_FILL);
     drawMesh();
     glDisable(GL_CULL_FACE);
-    texture.load("Bmps/chuches.bmp");
     glPolygonMode(GL_BACK, GL_FILL);
-    drawMesh();
-
+    drawMeshIn();
 
     //glPolygonMode(GL_FRONT, GL_LINE);
     //glPolygonMode(GL_BACK, GL_POINT);
-    
 
-    dmat4 aMat = modelViewMat * modelMat;
+    aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,height*0.85,0));
     aMat = translate(aMat ,dvec3(0,0,-(height*0.15)));
     aMat = rotate(aMat, radians(45.0), dvec3(1.0,0.0,0.0));
@@ -273,16 +265,11 @@ void Cubo::render(const glm::dmat4 &modelViewMat){
 
 Suelo::Suelo(GLdouble w,GLdouble h): Entity()
 {
-    //    mesh = Mesh::generateRectangle(w, h);
-    dmat4 aMat = modelMat;
-    aMat = rotate(aMat, radians(90.0), dvec3(1,0,0));
-    aMat = translate(aMat, dvec3(0,400,0));
     texture.load("Bmps/baldosaC.bmp");
+    //    texture.load("..\\Bmps\\baldosaC.bmp");
     modelMat = translate(modelMat, dvec3(00,-100,0));
     modelMat = rotate(modelMat, radians(90.0), dvec3(1,0,0));
     mesh = Mesh::generateRectanguloTex(w, h, 5, 5);
-
-    //    texture.load("..\\Bmps\\baldosaC.bmp");
     
 }
 //-------------------------------------------------------------------------
