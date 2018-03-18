@@ -52,6 +52,10 @@ public:
     
     void setSize(GLdouble aw, GLdouble ah);
     void scale(GLdouble s);
+	void moveLR(GLdouble cs); // Left / Right
+	void moveFB(GLdouble cs); // Forward / Backward
+	void moveUD(GLdouble cs); // Up / Down
+
     
 
     
@@ -60,6 +64,10 @@ protected:
     glm::dvec3 look = { 0.0, 0.0, 0.0 };
     glm::dvec3 up = { 0.0, 1.0, 0.0 };
     glm::dmat4 viewMat;  // inverse
+	glm::dvec3 front = { 0.1, 0.0, 0.0 };
+	glm::dvec3 right = { 0.0, 0.0, 0.1 };
+	glm::dvec3 down = { 0.0, -1.0, 0.0 };
+		
     
     GLdouble xRight, xLeft, yTop, yBot;
     GLdouble nearVal = 1;
@@ -71,6 +79,7 @@ protected:
     
     void setVM();
     void setPM();
+
 };
 
 //-------------------------------------------------------------------------

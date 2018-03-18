@@ -120,6 +120,18 @@ void key(unsigned char key, int x, int y)
             texture.loadColorBuffer(w, h);
             texture.save("prueba");
             break;
+		case 'A':
+			camera.moveLR(-1);
+			break;
+		case 'D':
+			camera.moveLR(1);
+			break;
+		case 'W':
+			camera.moveFB(-1);
+			break;
+		case 'S':
+			camera.moveFB(1);
+			break;
         default:
             need_redisplay = false;
             break;
