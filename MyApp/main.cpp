@@ -22,12 +22,18 @@ Camera camera(&viewPort);
 // Scene entities
 Scene scene(&camera);
 
+
+glm::dvec2 mCoord;
+
 //----------- Callbacks ----------------------------------------------------
 
 void display();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
+
+void mouse(int button, int state, int x, int y);
+void motion(int x, int y);
 
 
 //-------------------------------------------------------------------------
@@ -120,18 +126,18 @@ void key(unsigned char key, int x, int y)
             texture.loadColorBuffer(w, h);
             texture.save("prueba");
             break;
-		case 'A':
-			camera.moveLR(-1);
-			break;
-		case 'D':
-			camera.moveLR(1);
-			break;
-		case 'W':
-			camera.moveFB(-1);
-			break;
-		case 'S':
-			camera.moveFB(1);
-			break;
+        case 'A':
+            camera.moveLR(100.0);
+            break;
+        case 'D':
+            camera.moveLR(-100.0);
+            break;
+        case 'W':
+            camera.moveFB(500.0);
+            break;
+        case 'S':
+            camera.moveFB(-500.0);
+            break;
         default:
             need_redisplay = false;
             break;
@@ -139,6 +145,8 @@ void key(unsigned char key, int x, int y)
     
     if (need_redisplay)
         glutPostRedisplay();
+    camera.updateFront();
+
 }
 //-------------------------------------------------------------------------
 
@@ -148,24 +156,39 @@ void specialKey(int key, int x, int y)
     
     switch (key) {
         case GLUT_KEY_RIGHT:
-            camera.pitch(1);   // rotate 1 on the X axis
+            camera.pitchMethod(1);   // rotate 1 on the X axis
             break;
         case GLUT_KEY_LEFT:
-            camera.yaw(1);     // rotate 1 on the Y axis
+            camera.yawMethod(1);     // rotate 1 on the Y axis
             break;
         case GLUT_KEY_UP:
-            camera.roll(1);    // rotate 1 on the Z axis
+            camera.rollMethod(1);    // rotate 1 on the Z axis
             break;
         case GLUT_KEY_DOWN:
-            camera.roll(-1);   // rotate -1 on the Z axis
+            camera.rollMethod(-1);   // rotate -1 on the Z axis
             break;
         default:
             need_redisplay = false;
             break;
     }//switch
-    
+
     if (need_redisplay)
         glutPostRedisplay();
+    camera.updateFront();
 }
 //-------------------------------------------------------------------------
+
+
+void mouse(int button, int state, int x, int y){
+    
+    
+}
+
+
+void motion(int x, int y){
+    
+    
+    
+}
+
 

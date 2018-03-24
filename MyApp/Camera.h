@@ -43,31 +43,43 @@ public:
     void setAZ();  // lookAt(eye(0,0,500), look(0,0,0) up(0, 1, 0))
     void set3D();  // lookAt(eye(500,500,500), look(0,10,0) up(0, 1, 0))
     
-    void pitch(GLdouble a); // rotates a degrees on the X axis
-    void yaw(GLdouble a);   // rotates a degrees on the Y axis
-    void roll(GLdouble a);  // rotates a degrees on the Z axis
+    void pitchMethod(GLdouble a); // rotates a degrees on the X axis
+    void yawMethod(GLdouble a);   // rotates a degrees on the Y axis
+    void rollMethod(GLdouble a);  // rotates a degrees on the Z axis
     
     // projection matrix
     glm::dmat4 const& getProjMat() { return projMat; };
     
     void setSize(GLdouble aw, GLdouble ah);
     void scale(GLdouble s);
+    
+    
 	void moveLR(GLdouble cs); // Left / Right
 	void moveFB(GLdouble cs); // Forward / Backward
 	void moveUD(GLdouble cs); // Up / Down
 
-    
+    void updateFront();
+    void updateRight();
+    void updateDown();
 
     
+    void rotatePY(GLdouble offsetP,GLdouble offsetY);
+
+    void motion(int x, int y);
+
 protected:
     glm::dvec3 eye = { 0.0, 0.0, 500.0 };
     glm::dvec3 look = { 0.0, 0.0, 0.0 };
     glm::dvec3 up = { 0.0, 1.0, 0.0 };
     glm::dmat4 viewMat;  // inverse
-	glm::dvec3 front = { 0.1, 0.0, 0.0 };
-	glm::dvec3 right = { 0.0, 0.0, 0.1 };
-	glm::dvec3 down = { 0.0, -1.0, 0.0 };
-		
+    
+//    dvec3 front, right; // front = -n y right = u
+    glm::dvec3 front, right;
+	glm::dvec3 down;
+    
+    GLdouble pitch, yaw;
+    
+    bool orto;
     
     GLdouble xRight, xLeft, yTop, yBot;
     GLdouble nearVal = 1;
@@ -79,6 +91,7 @@ protected:
     
     void setVM();
     void setPM();
+    void setPrj();
 
 };
 
