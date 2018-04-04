@@ -63,6 +63,11 @@ int main(int argc, char *argv[])
     glutSpecialFunc(specialKey);
     glutDisplayFunc(display);
     
+    
+    glutMouseFunc(mouse);
+    glutMotionFunc(motion);
+
+    
     cout << glGetString(GL_VERSION) << '\n';
     cout << glGetString(GL_VENDOR) << '\n';
     
@@ -133,10 +138,14 @@ void key(unsigned char key, int x, int y)
             camera.moveLR(-100.0);
             break;
         case 'W':
-            camera.moveFB(500.0);
+            camera.moveFB(100.0);
             break;
         case 'S':
-            camera.moveFB(-500.0);
+            camera.moveFB(-100.0);
+            break;
+        case 'p':
+            camera.changeOrto();
+            camera.setPrj();
             break;
         default:
             need_redisplay = false;
@@ -146,6 +155,7 @@ void key(unsigned char key, int x, int y)
     if (need_redisplay)
         glutPostRedisplay();
     camera.updateFront();
+    camera.updateRight();
 
 }
 //-------------------------------------------------------------------------
@@ -156,16 +166,16 @@ void specialKey(int key, int x, int y)
     
     switch (key) {
         case GLUT_KEY_RIGHT:
-            camera.pitchMethod(1);   // rotate 1 on the X axis
+            camera.pitch(1);   // rotate 1 on the X axis
             break;
         case GLUT_KEY_LEFT:
-            camera.yawMethod(1);     // rotate 1 on the Y axis
+            camera.yaw(1);     // rotate 1 on the Y axis
             break;
         case GLUT_KEY_UP:
-            camera.rollMethod(1);    // rotate 1 on the Z axis
+            camera.roll(1);    // rotate 1 on the Z axis
             break;
         case GLUT_KEY_DOWN:
-            camera.rollMethod(-1);   // rotate -1 on the Z axis
+            camera.roll(-1);   // rotate -1 on the Z axis
             break;
         default:
             need_redisplay = false;
@@ -175,6 +185,7 @@ void specialKey(int key, int x, int y)
     if (need_redisplay)
         glutPostRedisplay();
     camera.updateFront();
+    camera.updateRight();
 }
 //-------------------------------------------------------------------------
 
@@ -186,9 +197,11 @@ void mouse(int button, int state, int x, int y){
 
 
 void motion(int x, int y){
-    
-    
-    
+    glm::dvec2 mOffset = mCoord; // var. global
+    mCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
+    mOffset = (mCoord - mOffset) * 0.05; // sensitivity = 0.05
+    camera.rotatePY(mOffset.y, mOffset.x);
+    glutPostRedisplay();
 }
 
 

@@ -64,23 +64,25 @@ void Camera::setVM()
 }
 //-------------------------------------------------------------------------
 
-void Camera::pitchMethod(GLdouble a)
-{
-    a = a*10;
-    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(1.0, 0, 0));
-
-//    eye.x += a; //-> Cambia la direcci—n de vista
-//    viewMat = lookAt(eye, dvec3(0.0, 0.0, 0.0), dvec3(0.0, 1.0, 0.0));
-}
-//-------------------------------------------------------------------------
-void Camera::yawMethod(GLdouble a)
+void Camera::pitch(GLdouble a)
 {
     a = a*10;
     
-    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(0, 1.0, 0));
+    rotatePY(a,0);
+//    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(1.0, 0, 0));
+
 }
 //-------------------------------------------------------------------------
-void Camera::rollMethod(GLdouble a)
+void Camera::yaw(GLdouble a)
+{
+    
+    a = a*10;
+    rotatePY(0,a);
+    
+//    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(0, 1.0, 0));
+}
+//-------------------------------------------------------------------------
+void Camera::roll(GLdouble a)
 {
     a = a*10;
     viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(0, 0, 1.0));
@@ -136,27 +138,40 @@ void Camera::moveUD(GLdouble cs) // Up / Down
 }
 
 void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
-    pitch+= offsetP;
-    yaw+= offsetY; // Actualizar los ‡ngulos
-    if (pitch > 89.5) pitch = 89.5; // Limitar los ‡ngulos ...
+    pitchAttribute+= offsetP;
+    yawAttribute+= offsetY; // Actualizar los ‡ngulos
+    
+    if (pitchAttribute > 89.5)
+        pitchAttribute = 89.5; // Limitar los ‡ngulos ...
+    
     // Actualizar la direcci—n de vista
-    front.x = sin(radians(yaw)) * cos(radians(pitch)); front.y = sin(radians(pitch));
-    front.z = -cos(radians(yaw)) * cos(radians(pitch));
+    front.x = sin(radians(yawAttribute)) * cos(radians(pitchAttribute));
+    front.y = sin(radians(pitchAttribute));
+    front.z = -cos(radians(yawAttribute)) * cos(radians(pitchAttribute));
     front = glm::normalize(front);
+    
     viewMat = lookAt(eye, eye + front, up);
-}
-
-void Camera::motion(int x, int y) {
-//    glm::dvec2 mOffset = mCoord; // var. global
-//    mCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
-//    mOffset = (mCoord - mOffset) * 0.05; // sensitivity = 0.05
-//    camera.rotatePY(mOffset.y, mOffset.x);
-    glutPostRedisplay();
 }
 
 
 void Camera::setPrj(){
+    if(orto == true){
+        glMatrixMode(GL_PROJECTION);
+        projMat = ortho(xLeft, xRight, yBot, yTop, yTop, farVal);
+        glLoadMatrixd(value_ptr(projMat));
+        glMatrixMode(GL_MODELVIEW);
+    }
+    else{
+        glMatrixMode(GL_PROJECTION);
+        projMat = frustum(xLeft, xRight, yBot, yTop, yTop, farVal);
+        glLoadMatrixd(value_ptr(projMat));
+        glMatrixMode(GL_MODELVIEW);
+    }
     
+}
+
+void Camera::changeOrto(){
+    orto = !orto;
 }
 
 

@@ -43,9 +43,9 @@ public:
     void setAZ();  // lookAt(eye(0,0,500), look(0,0,0) up(0, 1, 0))
     void set3D();  // lookAt(eye(500,500,500), look(0,10,0) up(0, 1, 0))
     
-    void pitchMethod(GLdouble a); // rotates a degrees on the X axis
-    void yawMethod(GLdouble a);   // rotates a degrees on the Y axis
-    void rollMethod(GLdouble a);  // rotates a degrees on the Z axis
+    void pitch(GLdouble a); // rotates a degrees on the X axis
+    void yaw(GLdouble a);   // rotates a degrees on the Y axis
+    void roll(GLdouble a);  // rotates a degrees on the Z axis
     
     // projection matrix
     glm::dmat4 const& getProjMat() { return projMat; };
@@ -61,11 +61,10 @@ public:
     void updateFront();
     void updateRight();
     void updateDown();
+    void changeOrto();
+    void setPrj();
 
-    
     void rotatePY(GLdouble offsetP,GLdouble offsetY);
-
-    void motion(int x, int y);
 
 protected:
     glm::dvec3 eye = { 0.0, 0.0, 500.0 };
@@ -77,7 +76,7 @@ protected:
     glm::dvec3 front, right;
 	glm::dvec3 down;
     
-    GLdouble pitch, yaw;
+    GLdouble pitchAttribute, yawAttribute;
     
     bool orto;
     
@@ -91,7 +90,6 @@ protected:
     
     void setVM();
     void setPM();
-    void setPrj();
 
 };
 
