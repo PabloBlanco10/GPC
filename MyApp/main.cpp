@@ -151,11 +151,11 @@ void key(unsigned char key, int x, int y)
             need_redisplay = false;
             break;
     }//switch
-    
-    if (need_redisplay)
-        glutPostRedisplay();
     camera.updateFront();
     camera.updateRight();
+    camera.updatePitchYaw();
+    if (need_redisplay)
+        glutPostRedisplay();
 
 }
 //-------------------------------------------------------------------------
@@ -166,33 +166,38 @@ void specialKey(int key, int x, int y)
     
     switch (key) {
         case GLUT_KEY_RIGHT:
-            camera.pitch(1);   // rotate 1 on the X axis
+//            camera.pitch(1);   // rotate 1 on the X axis
+            camera.yaw(-1);     // rotate 1 on the Y axis
+
             break;
         case GLUT_KEY_LEFT:
             camera.yaw(1);     // rotate 1 on the Y axis
             break;
         case GLUT_KEY_UP:
-            camera.roll(1);    // rotate 1 on the Z axis
+//            camera.roll(1);    // rotate 1 on the Z axis
+            camera.pitch(-1);   // rotate 1 on the X axis
+
             break;
         case GLUT_KEY_DOWN:
-            camera.roll(-1);   // rotate -1 on the Z axis
+//            camera.roll(-1);   // rotate -1 on the Z axis
+            camera.pitch(1);   // rotate 1 on the X axis
+
             break;
         default:
             need_redisplay = false;
             break;
     }//switch
-
-    if (need_redisplay)
-        glutPostRedisplay();
     camera.updateFront();
     camera.updateRight();
+    
+    if (need_redisplay)
+        glutPostRedisplay();
 }
 //-------------------------------------------------------------------------
 
 
 void mouse(int button, int state, int x, int y){
-    
-    
+    mCoord = glm::dvec2(x, glutGet(GLUT_WINDOW_HEIGHT) - y);
 }
 
 

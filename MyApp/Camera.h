@@ -63,6 +63,8 @@ public:
     void updateDown();
     void changeOrto();
     void setPrj();
+    void updatePitchYaw();
+
 
     void rotatePY(GLdouble offsetP,GLdouble offsetY);
 

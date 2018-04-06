@@ -40,8 +40,6 @@ void Camera::setAZ()
     up= dvec3(0, 1, 0);
     viewMat = lookAt(eye, look, up);
     setVM();
-    updateFront();
-    updateRight();
 }
 //-------------------------------------------------------------------------
 
@@ -52,8 +50,6 @@ void Camera::set3D()
     up= dvec3(0, 1, 0);
     viewMat = lookAt(eye, look, up);
     setVM();
-    updateFront();
-    updateRight();
 }
 //-------------------------------------------------------------------------
 
@@ -134,7 +130,7 @@ void Camera::moveFB(GLdouble cs) // Forward / Backward
 void Camera::moveUD(GLdouble cs) // Up / Down
 {
     eye = eye + (down * cs);
-    viewMat = lookAt(eye, eye + down, up);
+    viewMat = lookAt(eye, eye + front, up);
 }
 
 void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
@@ -174,7 +170,6 @@ void Camera::changeOrto(){
     orto = !orto;
 }
 
-
 void Camera::updateFront(){
     front = -(normalize(eye-look)); // -n es la direcci—n de vista
 }
@@ -186,3 +181,9 @@ void Camera::updateRight(){
 void Camera::updateDown(){
     down = cross(-front, right); // ortogonal a n y u
 }
+
+void Camera::updatePitchYaw(){
+    pitchAttribute = degrees(asin(front.y));
+    yawAttribute = degrees(asin(front.x / cos(radians(pitchAttribute))));
+}
+
