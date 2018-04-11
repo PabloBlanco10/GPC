@@ -1,0 +1,387 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 48;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DB0D7B68204F134600897D69 /* Texture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB0D7B66204F134600897D69 /* Texture.cpp */; };
+		DB0D7B6B204F13BE00897D69 /* PixMap32RGBA.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB0D7B69204F13BE00897D69 /* PixMap32RGBA.cpp */; };
+		DB75ED5F2033657300E6139B /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB75ED532033657300E6139B /* Camera.cpp */; };
+		DB75ED602033657300E6139B /* Entities.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB75ED542033657300E6139B /* Entities.cpp */; };
+		DB75ED612033657300E6139B /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB75ED582033657300E6139B /* Scene.cpp */; };
+		DB75ED622033657300E6139B /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB75ED5C2033657300E6139B /* Mesh.cpp */; };
+		DB75ED632033657300E6139B /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = DB75ED5E2033657300E6139B /* main.cpp */; };
+		DB75EE912033695300E6139B /* OpenGL.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EE902033695300E6139B /* OpenGL.framework */; };
+		DB75EED72034C1A600E6139B /* libglut.3.10.0.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EED22034C1A500E6139B /* libglut.3.10.0.dylib */; };
+		DB75EED82034C1A600E6139B /* libglut.3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EED32034C1A500E6139B /* libglut.3.dylib */; };
+		DB75EED92034C1A600E6139B /* libglut.a in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EED42034C1A600E6139B /* libglut.a */; };
+		DB75EEDA2034C1A600E6139B /* pkgconfig in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EED52034C1A600E6139B /* pkgconfig */; };
+		DB75EEDB2034C1A600E6139B /* libglut.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = DB75EED62034C1A600E6139B /* libglut.dylib */; };
+		DBF3BC0F2052F70700557104 /* Bmps in CopyFiles */ = {isa = PBXBuildFile; fileRef = DBF3BC0E2052F70700557104 /* Bmps */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		DB75ED472033655000E6139B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+		DBF3BC0D2052F66A00557104 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 7;
+			files = (
+				DBF3BC0F2052F70700557104 /* Bmps in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		DB0D7B66204F134600897D69 /* Texture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Texture.cpp; path = ../../../GitHub/GPC/MyApp/Texture.cpp; sourceTree = "<group>"; };
+		DB0D7B67204F134600897D69 /* Texture.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = Texture.h; path = ../../../GitHub/GPC/MyApp/Texture.h; sourceTree = "<group>"; };
+		DB0D7B69204F13BE00897D69 /* PixMap32RGBA.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = PixMap32RGBA.cpp; path = ../../../GitHub/GPC/MyApp/PixMap32RGBA.cpp; sourceTree = "<group>"; };
+		DB0D7B6A204F13BE00897D69 /* PixMap32RGBA.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PixMap32RGBA.h; path = ../../../GitHub/GPC/MyApp/PixMap32RGBA.h; sourceTree = "<group>"; };
+		DB75ED492033655000E6139B /* MyApp */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = MyApp; sourceTree = BUILT_PRODUCTS_DIR; };
+		DB75ED532033657300E6139B /* Camera.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Camera.cpp; path = ../../../GitHub/GPC/MyApp/Camera.cpp; sourceTree = "<group>"; };
+		DB75ED542033657300E6139B /* Entities.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Entities.cpp; path = ../../../GitHub/GPC/MyApp/Entities.cpp; sourceTree = "<group>"; };
+		DB75ED562033657300E6139B /* Camera.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Camera.h; path = ../../../GitHub/GPC/MyApp/Camera.h; sourceTree = "<group>"; };
+		DB75ED572033657300E6139B /* Mesh.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Mesh.h; path = ../../../GitHub/GPC/MyApp/Mesh.h; sourceTree = "<group>"; };
+		DB75ED582033657300E6139B /* Scene.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Scene.cpp; path = ../../../GitHub/GPC/MyApp/Scene.cpp; sourceTree = "<group>"; };
+		DB75ED592033657300E6139B /* Scene.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Scene.h; path = ../../../GitHub/GPC/MyApp/Scene.h; sourceTree = "<group>"; };
+		DB75ED5A2033657300E6139B /* Entities.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Entities.h; path = ../../../GitHub/GPC/MyApp/Entities.h; sourceTree = "<group>"; };
+		DB75ED5C2033657300E6139B /* Mesh.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = Mesh.cpp; path = ../../../GitHub/GPC/MyApp/Mesh.cpp; sourceTree = "<group>"; };
+		DB75ED5E2033657300E6139B /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../GitHub/GPC/MyApp/main.cpp; sourceTree = "<group>"; };
+		DB75EE902033695300E6139B /* OpenGL.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGL.framework; path = System/Library/Frameworks/OpenGL.framework; sourceTree = SDKROOT; };
+		DB75EE922033695A00E6139B /* GLUT.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLUT.framework; path = System/Library/Frameworks/GLUT.framework; sourceTree = SDKROOT; };
+		DB75EE942033696400E6139B /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		DB75EED02034BEC400E6139B /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../opt/X11/lib/libglut.3.dylib; sourceTree = "<group>"; };
+		DB75EED22034C1A500E6139B /* libglut.3.10.0.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.10.0.dylib; path = ../../../../usr/local/Cellar/freeglut/3.0.0/lib/libglut.3.10.0.dylib; sourceTree = "<group>"; };
+		DB75EED32034C1A500E6139B /* libglut.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.3.dylib; path = ../../../../usr/local/Cellar/freeglut/3.0.0/lib/libglut.3.dylib; sourceTree = "<group>"; };
+		DB75EED42034C1A600E6139B /* libglut.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libglut.a; path = ../../../../usr/local/Cellar/freeglut/3.0.0/lib/libglut.a; sourceTree = "<group>"; };
+		DB75EED52034C1A600E6139B /* pkgconfig */ = {isa = PBXFileReference; lastKnownFileType = folder; name = pkgconfig; path = ../../../../usr/local/Cellar/freeglut/3.0.0/lib/pkgconfig; sourceTree = "<group>"; };
+		DB75EED62034C1A600E6139B /* libglut.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libglut.dylib; path = ../../../../usr/local/Cellar/freeglut/3.0.0/lib/libglut.dylib; sourceTree = "<group>"; };
+		DBF3BC0E2052F70700557104 /* Bmps */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Bmps; path = ../../GitHub/GPC/Bmps; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DB75ED462033655000E6139B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB75EE912033695300E6139B /* OpenGL.framework in Frameworks */,
+				DB75EED72034C1A600E6139B /* libglut.3.10.0.dylib in Frameworks */,
+				DB75EED82034C1A600E6139B /* libglut.3.dylib in Frameworks */,
+				DB75EED92034C1A600E6139B /* libglut.a in Frameworks */,
+				DB75EEDA2034C1A600E6139B /* pkgconfig in Frameworks */,
+				DB75EEDB2034C1A600E6139B /* libglut.dylib in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DB75ED402033655000E6139B = {
+			isa = PBXGroup;
+			children = (
+				DBF3BC0E2052F70700557104 /* Bmps */,
+				DB75ED4B2033655000E6139B /* MyApp */,
+				DB75ED4A2033655000E6139B /* Products */,
+				DB75EE8F2033695300E6139B /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		DB75ED4A2033655000E6139B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DB75ED492033655000E6139B /* MyApp */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DB75ED4B2033655000E6139B /* MyApp */ = {
+			isa = PBXGroup;
+			children = (
+				DB75ED532033657300E6139B /* Camera.cpp */,
+				DB75ED562033657300E6139B /* Camera.h */,
+				DB75ED542033657300E6139B /* Entities.cpp */,
+				DB75ED5A2033657300E6139B /* Entities.h */,
+				DB75ED5E2033657300E6139B /* main.cpp */,
+				DB75ED5C2033657300E6139B /* Mesh.cpp */,
+				DB75ED572033657300E6139B /* Mesh.h */,
+				DB75ED582033657300E6139B /* Scene.cpp */,
+				DB75ED592033657300E6139B /* Scene.h */,
+				DB0D7B66204F134600897D69 /* Texture.cpp */,
+				DB0D7B67204F134600897D69 /* Texture.h */,
+				DB0D7B69204F13BE00897D69 /* PixMap32RGBA.cpp */,
+				DB0D7B6A204F13BE00897D69 /* PixMap32RGBA.h */,
+			);
+			name = MyApp;
+			path = ../../GitHub/GPC/MyApp;
+			sourceTree = "<group>";
+		};
+		DB75EE8F2033695300E6139B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				DB75EED02034BEC400E6139B /* libglut.3.dylib */,
+				DB75EED22034C1A500E6139B /* libglut.3.10.0.dylib */,
+				DB75EED32034C1A500E6139B /* libglut.3.dylib */,
+				DB75EED42034C1A600E6139B /* libglut.a */,
+				DB75EED62034C1A600E6139B /* libglut.dylib */,
+				DB75EED52034C1A600E6139B /* pkgconfig */,
+				DB75EE942033696400E6139B /* GLKit.framework */,
+				DB75EE922033695A00E6139B /* GLUT.framework */,
+				DB75EE902033695300E6139B /* OpenGL.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DB75ED482033655000E6139B /* MyApp */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DB75ED502033655000E6139B /* Build configuration list for PBXNativeTarget "MyApp" */;
+			buildPhases = (
+				DB75ED452033655000E6139B /* Sources */,
+				DB75ED462033655000E6139B /* Frameworks */,
+				DB75ED472033655000E6139B /* CopyFiles */,
+				DBF3BC0D2052F66A00557104 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = MyApp;
+			productName = MyApp;
+			productReference = DB75ED492033655000E6139B /* MyApp */;
+			productType = "com.apple.product-type.tool";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DB75ED412033655000E6139B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0920;
+				ORGANIZATIONNAME = "Pablo Blanco Peris";
+				TargetAttributes = {
+					DB75ED482033655000E6139B = {
+						CreatedOnToolsVersion = 9.2;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = DB75ED442033655000E6139B /* Build configuration list for PBXProject "MyApp" */;
+			compatibilityVersion = "Xcode 8.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = DB75ED402033655000E6139B;
+			productRefGroup = DB75ED4A2033655000E6139B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DB75ED482033655000E6139B /* MyApp */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DB75ED452033655000E6139B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DB75ED612033657300E6139B /* Scene.cpp in Sources */,
+				DB0D7B68204F134600897D69 /* Texture.cpp in Sources */,
+				DB75ED602033657300E6139B /* Entities.cpp in Sources */,
+				DB75ED622033657300E6139B /* Mesh.cpp in Sources */,
+				DB75ED632033657300E6139B /* main.cpp in Sources */,
+				DB75ED5F2033657300E6139B /* Camera.cpp in Sources */,
+				DB0D7B6B204F13BE00897D69 /* PixMap32RGBA.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		DB75ED4E2033655000E6139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		DB75ED4F2033655000E6139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "c++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.13;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		DB75ED512033655000E6139B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EHDZQ72CF8;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/freeglut/3.0.0/include/,
+					./glm,
+					../glm,
+					../,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/freeglut/3.0.0/lib/,
+					/usr/local/Cellar/freeglut/3.0.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		DB75ED522033655000E6139B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = EHDZQ72CF8;
+				HEADER_SEARCH_PATHS = (
+					/usr/local/Cellar/freeglut/3.0.0/include/,
+					./glm,
+					../glm,
+					../,
+				);
+				LIBRARY_SEARCH_PATHS = (
+					/usr/local/Cellar/freeglut/3.0.0/lib/,
+					/usr/local/Cellar/freeglut/3.0.0/lib,
+				);
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
+				"MTL_ENABLE_DEBUG_INFO[arch=*]" = NO;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DB75ED442033655000E6139B /* Build configuration list for PBXProject "MyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB75ED4E2033655000E6139B /* Debug */,
+				DB75ED4F2033655000E6139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DB75ED502033655000E6139B /* Build configuration list for PBXNativeTarget "MyApp" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DB75ED512033655000E6139B /* Debug */,
+				DB75ED522033655000E6139B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = DB75ED412033655000E6139B /* Project object */;
+}
