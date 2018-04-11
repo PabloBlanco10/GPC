@@ -338,7 +338,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y3D48S5X67;
+				DEVELOPMENT_TEAM = Q3RYN8A3D8;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/freeglut/3.0.0/include/,
 					./glm,
@@ -360,7 +360,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = Y3D48S5X67;
+				DEVELOPMENT_TEAM = Q3RYN8A3D8;
 				HEADER_SEARCH_PATHS = (
 					/usr/local/Cellar/freeglut/3.0.0/include/,
 					./glm,
