@@ -28,6 +28,7 @@ public:
     void unbind() { glBindTexture(GL_TEXTURE_2D, 0); };
     bool loadColorBuffer(GLsizei width, GLsizei height);
     bool save(const std::string & BMP_Name);
+    bool load(const std::string & BMP_Name, glm::ivec3 color, GLubyte alpha);
     
 protected:
     GLuint w, h; // dimensiones de la imagen

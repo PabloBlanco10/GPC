@@ -62,3 +62,21 @@ bool Texture:: save(const std::string & BMP_Name){
     pixMap.save_bmp24BGR("/Users/pabloblanco/Downloads/save.bmp");
     return false;
 }
+
+
+bool Texture::load(const std::string & BMP_Name, glm::ivec3 color, GLubyte alpha){
+//    if (id == 0) init();
+//    PixMap32RGBA pixMap; // var. local para cargar la imagen del archivo
+//    pixMap.load_bmp24BGR(BMP_Name); // carga y añade alpha=255
+//    // carga correcta?
+//
+//    if (alpha != 255) pixMap.set_colorkey_alpha(PixMap32RGBA::rgba_color colorKey)(alpha);
+//    w = pixMap.width();
+//    h = pixMap.height();
+//    glBindTexture(GL_TEXTURE_2D, id);
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, w, h, 0, GL_RGBA,
+//                 GL_UNSIGNED_BYTE, pixMap.data());
+//
+    return false;
+}
+

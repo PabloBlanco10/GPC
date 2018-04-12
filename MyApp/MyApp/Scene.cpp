@@ -32,6 +32,8 @@ void Scene::init()
     objetos.push_back(new Suelo(1200.0, 1200.0));
     objetos.push_back(new Cubo(200.0));
     objetos.push_back(new GlassPot(200.0));
+    //10
+    objetos.push_back(new Grass(100.0));
 
 
     
@@ -140,6 +142,7 @@ void Scene::renderScenario(){
     it[7]->render(camera->getViewMat());
     it[5]->render(camera->getViewMat());
     it[9]->render(camera->getViewMat());
+    it[10]->render(camera->getViewMat());
 }
 
 

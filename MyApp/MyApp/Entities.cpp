@@ -291,16 +291,19 @@ void Suelo::draw()
 GlassPot::GlassPot(GLdouble l): Entity()
 {
     modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
-    texture.load("Bmps/grass.bmp");
-    mesh = Mesh::generateContCubo(l);
+    texture.load("Bmps/window.bmp", 150);
+    mesh = Mesh::generateCuboTex(l);
 }
 //-------------------------------------------------------------------------
 
 void GlassPot::draw()
 {
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     texture.bind();
     mesh->draw();
     texture.unbind();
+    glDisable(GL_BLEND);
 }
 
 void GlassPot::render(const glm::dmat4 &modelViewMat){
@@ -326,3 +329,47 @@ void GlassPot::render(const glm::dmat4 &modelViewMat){
 }
 
 
+//-------------------------------------------------------------------------
+
+
+Grass::Grass(GLdouble l): Entity()
+{
+    glMatrixMode(GL_MODELVIEW);
+    glLoadMatrixd(value_ptr(modelMat));
+    setMvM(modelMat);
+
+    modelMat = translate(modelMat, dvec3(200.0, 0.0, -200.0));
+    modelMat = rotate(modelMat, radians(180.0), dvec3(0.0,0.0,1.0));
+    texture.load("Bmps/grass.bmp");
+    mesh = Mesh::generateRectanguloTex(l, l, 1, 1);
+}
+//-------------------------------------------------------------------------
+
+void Grass::draw()
+{
+    texture.bind();
+    mesh->draw();
+    texture.unbind();
+}
+
+//void Grass::render(const glm::dmat4 &modelViewMat){
+//    glMatrixMode(GL_MODELVIEW);
+//
+//    dmat4 aMat = modelViewMat * modelMat;
+//    glLoadMatrixd(value_ptr(aMat));
+//    draw();
+//
+//
+//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
+//    glLoadMatrixd(value_ptr(aMat));
+//    draw();
+//
+//    aMat = modelViewMat * modelMat;
+//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
+//    glLoadMatrixd(value_ptr(aMat));
+//    draw();
+//
+//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 0.0, 1.0));
+//    glLoadMatrixd(value_ptr(aMat));
+//    draw();
+//}

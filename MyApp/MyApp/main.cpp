@@ -140,21 +140,21 @@ void key(unsigned char key, int x, int y)
             break;
         case 'A':
             camera.moveLR(-100.0);
-            camera.updateRight();
+//            camera.updateRight();
             break;
         case 'D':
             camera.moveLR(100.0);
-            camera.updateRight();
+//            camera.updateRight();
             break;
         case 'W':
             camera.moveFB(100.0);
-            camera.updateFront();
-            camera.updatePitchYaw();
+//            camera.updateFront();
+//            camera.updatePitchYaw();
             break;
         case 'S':
             camera.moveFB(-100.0);
-            camera.updateFront();
-            camera.updatePitchYaw();
+//            camera.updateFront();
+//            camera.updatePitchYaw();
             break;
         case 'p':
             camera.changeOrto();

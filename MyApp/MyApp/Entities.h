@@ -132,6 +132,7 @@ class Grass : public Entity
 {
 public:
     Grass(GLdouble l);
+//    virtual void render(glm::dmat4 const& modelViewMat);
     ~Grass() { };
     virtual void draw();
 };
