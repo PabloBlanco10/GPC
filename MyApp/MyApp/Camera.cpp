@@ -111,7 +111,6 @@ void Camera::setSize(GLdouble aw, GLdouble ah)
 
 void Camera::setPM() 
 {
-
     if(orto){
         projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
     }
@@ -121,7 +120,6 @@ void Camera::setPM()
     glMatrixMode(GL_PROJECTION);
     glLoadMatrixd(value_ptr(projMat));
     glMatrixMode(GL_MODELVIEW);
-
 }
 //-------------------------------------------------------------------------
 
@@ -161,26 +159,8 @@ void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
 }
 
 
-//void Camera::setPrj(){
-//    if(orto == true){
-//        glMatrixMode(GL_PROJECTION);
-//        projMat = ortho(xLeft, xRight, yBot, yTop, yTop, farVal);
-//        glLoadMatrixd(value_ptr(projMat));
-//        glMatrixMode(GL_MODELVIEW);
-//    }
-//    else{
-//        glMatrixMode(GL_PROJECTION);
-//        projMat = frustum(xLeft, xRight, yBot, yTop, yTop, farVal);
-//        glLoadMatrixd(value_ptr(projMat));
-//        glMatrixMode(GL_MODELVIEW);
-//    }
-//
-//}
-
 void Camera::changeOrto(){
     orto = !orto;
-    
-//    setPrj();
     setPM();
 }
 
