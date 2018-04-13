@@ -339,8 +339,7 @@ Grass::Grass(GLdouble l): Entity()
 {
 
     modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
-//    modelMat = rotate(modelMat, radians(180.0), dvec3(0.5,0.0,1.0));
-//    /texture.load("Bmps/grass.bmp");
+//    modelMat = rotate(modelMat, radians(180.0), dvec3(0.0,1.0,0.0));
     texture.load("Bmps/grass.bmp", ivec3(0,0,0), 0);
 
     mesh = Mesh::generateRectanguloTex(l, l, 1, 1);

@@ -31,9 +31,9 @@ void Scene::init()
     objetos.push_back(new Rectangulo(200.0, 200.0, 0, 0));
     objetos.push_back(new Suelo(1200.0, 1200.0));
     objetos.push_back(new Cubo(200.0));
-    objetos.push_back(new GlassPot(200.0));
-    //10
     objetos.push_back(new Grass(100.0));
+    //10
+    objetos.push_back(new GlassPot(200.0));
 
 
     
