@@ -207,10 +207,10 @@ Mesh * Mesh::generateRectangulo(GLdouble w,GLdouble h){
     m->numVertices = 4;
     
     m->vertices = new dvec3[m->numVertices];
-    m->vertices[0] = dvec3(-(w/2), -(h/2), 0);
-    m->vertices[1] = dvec3(-(w/2), h/2, 0);
-    m->vertices[2] = dvec3(w/2, -(h/2), 0);
-    m->vertices[3] = dvec3(w/2, h/2, 0);
+    m->vertices[0] = dvec3(-(w/2), (h/2), 0);
+    m->vertices[1] = dvec3(-(w/2), -(h/2), 0);
+    m->vertices[2] = dvec3(w/2, h/2, 0);
+    m->vertices[3] = dvec3(w/2, -(h/2), 0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
 //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);

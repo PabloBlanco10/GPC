@@ -58,11 +58,9 @@ public:
 	void moveFB(GLdouble cs); // Forward / Backward
 	void moveUD(GLdouble cs); // Up / Down
 
-    void updateFront();
-    void updateRight();
+    void updateFrontRight();
     void updateDown();
     void changeOrto();
-    void setPrj();
     void updatePitchYaw();
 
 
@@ -80,7 +78,7 @@ protected:
     
     GLdouble pitchAttribute, yawAttribute;
     
-    bool orto;
+    bool orto = true;
     
     GLdouble xRight, xLeft, yTop, yBot;
     GLdouble nearVal = 1;

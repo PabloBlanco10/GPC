@@ -38,6 +38,9 @@ void Camera::setAZ()
     eye= dvec3(0, 0, 500);
     look= dvec3(0, 0, 0);
     up= dvec3(0, 1, 0);
+    yawAttribute = 0;
+    pitchAttribute = 0;
+    updateFrontRight();
     viewMat = lookAt(eye, look, up);
     setVM();
 }
@@ -48,6 +51,8 @@ void Camera::set3D()
     eye= dvec3(500, 500, 500);
     look= dvec3(0, 10, 0);
     up= dvec3(0, 1, 0);
+    updateFrontRight();
+    updatePitchYaw();
     viewMat = lookAt(eye, look, up);
     setVM();
 }
@@ -106,11 +111,16 @@ void Camera::setSize(GLdouble aw, GLdouble ah)
 
 void Camera::setPM() 
 {
-    projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+
+    if(orto){
+        projMat = ortho(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, nearVal, farVal);
+    }
+    else{
+        projMat = frustum(xLeft*factScale, xRight*factScale, yBot*factScale, yTop*factScale, yTop, farVal);
+    }
     glMatrixMode(GL_PROJECTION);
     glLoadMatrixd(value_ptr(projMat));
     glMatrixMode(GL_MODELVIEW);
-//    front = -(normalize(eye-look));
 
 }
 //-------------------------------------------------------------------------
@@ -147,34 +157,35 @@ void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
     front = glm::normalize(front);
     
     viewMat = lookAt(eye, eye + front, up);
+    right = (normalize(cross(up,-front))); // ortogonal a up y n
 }
 
 
-void Camera::setPrj(){
-    if(orto == true){
-        glMatrixMode(GL_PROJECTION);
-        projMat = ortho(xLeft, xRight, yBot, yTop, yTop, farVal);
-        glLoadMatrixd(value_ptr(projMat));
-        glMatrixMode(GL_MODELVIEW);
-    }
-    else{
-        glMatrixMode(GL_PROJECTION);
-        projMat = frustum(xLeft, xRight, yBot, yTop, yTop, farVal);
-        glLoadMatrixd(value_ptr(projMat));
-        glMatrixMode(GL_MODELVIEW);
-    }
-    
-}
+//void Camera::setPrj(){
+//    if(orto == true){
+//        glMatrixMode(GL_PROJECTION);
+//        projMat = ortho(xLeft, xRight, yBot, yTop, yTop, farVal);
+//        glLoadMatrixd(value_ptr(projMat));
+//        glMatrixMode(GL_MODELVIEW);
+//    }
+//    else{
+//        glMatrixMode(GL_PROJECTION);
+//        projMat = frustum(xLeft, xRight, yBot, yTop, yTop, farVal);
+//        glLoadMatrixd(value_ptr(projMat));
+//        glMatrixMode(GL_MODELVIEW);
+//    }
+//
+//}
 
 void Camera::changeOrto(){
     orto = !orto;
+    
+//    setPrj();
+    setPM();
 }
 
-void Camera::updateFront(){
+void Camera::updateFrontRight(){
     front = -(normalize(eye-look)); // -n es la direcci—n de vista
-}
-
-void Camera::updateRight(){
     right = (normalize(cross(up,-front))); // ortogonal a up y n
 }
 

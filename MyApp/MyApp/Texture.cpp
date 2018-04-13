@@ -63,7 +63,6 @@ bool Texture:: save(const std::string & BMP_Name){
     return false;
 }
 
-
 bool Texture::load(const std::string & BMP_Name, glm::ivec3 color, GLubyte alpha){
     if (id == 0) init();
     PixMap32RGBA pixMap; // var. local para cargar la imagen del archivo

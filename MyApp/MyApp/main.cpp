@@ -63,8 +63,8 @@ int main(int argc, char *argv[])
     glutSpecialFunc(specialKey);
     glutDisplayFunc(display);
     
-    camera.updateFront();
-    camera.updateRight();
+    camera.updateFrontRight();
+
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
 
@@ -121,15 +121,9 @@ void key(unsigned char key, int x, int y)
             break;
         case 'l':
             camera.set3D();
-            camera.updateRight();
-            camera.updateFront();
-            camera.updatePitchYaw();
             break;
         case 'o':
             camera.setAZ();
-            camera.updateRight();
-            camera.updateFront();
-            camera.updatePitchYaw();
             break;
         case 'a':
             scene.rotarDiabolo();
@@ -140,28 +134,18 @@ void key(unsigned char key, int x, int y)
             break;
         case 'A':
             camera.moveLR(-100.0);
-//            camera.updateRight();
             break;
         case 'D':
             camera.moveLR(100.0);
-//            camera.updateRight();
             break;
         case 'W':
             camera.moveFB(100.0);
-//            camera.updateFront();
-//            camera.updatePitchYaw();
             break;
         case 'S':
             camera.moveFB(-100.0);
-//            camera.updateFront();
-//            camera.updatePitchYaw();
             break;
         case 'p':
             camera.changeOrto();
-            camera.setPrj();
-            camera.updateFront();
-            camera.updateRight();
-            camera.updatePitchYaw();
             break;
         default:
             need_redisplay = false;
@@ -194,7 +178,6 @@ void specialKey(int key, int x, int y)
         case GLUT_KEY_DOWN:
 //            camera.roll(-1);   // rotate -1 on the Z axis
             camera.pitch(1);   // rotate 1 on the X axis
-
             break;
         default:
             need_redisplay = false;
