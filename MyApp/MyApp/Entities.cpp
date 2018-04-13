@@ -291,19 +291,22 @@ void Suelo::draw()
 GlassPot::GlassPot(GLdouble l): Entity()
 {
     modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
-    texture.load("Bmps/window.bmp", 150);
+    texture.load("Bmps/window.bmp", 50);
     mesh = Mesh::generateCuboTex(l);
 }
 //-------------------------------------------------------------------------
 
 void GlassPot::draw()
 {
+    glDepthMask(GL_FALSE);
     glEnable(GL_BLEND);
     glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     texture.bind();
     mesh->draw();
     texture.unbind();
     glDisable(GL_BLEND);
+    glDepthMask(GL_TRUE);
+
 }
 
 void GlassPot::render(const glm::dmat4 &modelViewMat){
@@ -338,18 +341,25 @@ Grass::Grass(GLdouble l): Entity()
     glLoadMatrixd(value_ptr(modelMat));
     setMvM(modelMat);
 
-    modelMat = translate(modelMat, dvec3(200.0, 0.0, -200.0));
-    modelMat = rotate(modelMat, radians(180.0), dvec3(0.0,0.0,1.0));
-    texture.load("Bmps/grass.bmp");
+    modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
+    modelMat = rotate(modelMat, radians(180.0), dvec3(0.5,0.0,1.0));
+//    /texture.load("Bmps/grass.bmp");
+    texture.load("Bmps/grass.bmp", ivec3(0,0,0), 0);
+
     mesh = Mesh::generateRectanguloTex(l, l, 1, 1);
 }
 //-------------------------------------------------------------------------
 
 void Grass::draw()
 {
+    glDepthMask(GL_FALSE);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     texture.bind();
     mesh->draw();
     texture.unbind();
+    glDisable(GL_BLEND);
+    glDepthMask(GL_TRUE);
 }
 
 //void Grass::render(const glm::dmat4 &modelViewMat){
