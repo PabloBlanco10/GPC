@@ -43,7 +43,7 @@ void Camera::setAZ()
     yawAttribute = 0;
     pitchAttribute = 0;
     updateFrontRight();
-    viewMat = lookAt(eye, look, up);
+    viewMat = lookAt(eye, look, top);
     setVM();
 }
 //-------------------------------------------------------------------------
@@ -57,7 +57,7 @@ void Camera::set3D()
     top = up;
     updateFrontRight();
     updatePitchYaw();
-    viewMat = lookAt(eye, look, up);
+    viewMat = lookAt(eye, look, top);
     setVM();
 }
 //-------------------------------------------------------------------------
@@ -131,19 +131,21 @@ void Camera::setPM()
 void Camera::moveLR(GLdouble cs) // Left / Right
 {
     eye = eye + (right * cs);
-    viewMat = lookAt(eye, eye + front, up);
+    viewMat = lookAt(eye, eye + front, top);
 }
 
 void Camera::moveFB(GLdouble cs) // Forward / Backward
 {
     eye = eye + (front * cs);
-    viewMat = lookAt(eye, eye + front, up);
+    viewMat = lookAt(eye, eye + front, top);
 }
 
 void Camera::moveUD(GLdouble cs) // Up / Down
 {
-    eye = eye + (up * cs);
-    viewMat = lookAt(eye, eye + front, up);
+//    eye = eye + (up * cs);
+//    viewMat = lookAt(eye, eye + front, up);
+    eye = eye + (top * cs);
+    viewMat = lookAt(eye, eye + front, top);
 }
 
 void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
@@ -159,8 +161,10 @@ void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
     front.z = -cos(radians(yawAttribute)) * cos(radians(pitchAttribute));
     front = glm::normalize(front);
     
-    viewMat = lookAt(eye, eye + front, up);
-    right = (normalize(cross(up,-front))); // ortogonal a up y n
+//    viewMat = lookAt(eye, eye + front, up);
+    viewMat = lookAt(eye, eye + front, top);
+
+    right = (normalize(cross(top,-front))); // ortogonal a up y n
 }
 
 
@@ -172,11 +176,7 @@ void Camera::rotateRoll(GLdouble offsetR) {
     top.y = sin(radians(rollAttribute));
     
     viewMat = lookAt(eye, eye + front, top);
-    updateFrontRight();
 }
-
-
-
 
 void Camera::changeOrto(){
     orto = !orto;
@@ -185,7 +185,7 @@ void Camera::changeOrto(){
 
 void Camera::updateFrontRight(){
     front = -(normalize(eye-look)); // -n es la direcci—n de vista
-    right = (normalize(cross(up,-front))); // ortogonal a up y n
+    right = (normalize(cross(top,-front))); // ortogonal a up y n
 }
 
 void Camera::updateDown(){
