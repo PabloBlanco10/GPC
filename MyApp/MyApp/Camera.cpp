@@ -38,6 +38,8 @@ void Camera::setAZ()
     eye= dvec3(0, 0, 500);
     look= dvec3(0, 0, 0);
     up= dvec3(0, 1, 0);
+    top = up;
+    rollAttribute = degrees(acos(top.x));
     yawAttribute = 0;
     pitchAttribute = 0;
     updateFrontRight();
@@ -51,6 +53,8 @@ void Camera::set3D()
     eye= dvec3(500, 500, 500);
     look= dvec3(0, 10, 0);
     up= dvec3(0, 1, 0);
+    rollAttribute = degrees(acos(top.x));
+    top = up;
     updateFrontRight();
     updatePitchYaw();
     viewMat = lookAt(eye, look, up);
@@ -86,7 +90,8 @@ void Camera::yaw(GLdouble a)
 void Camera::roll(GLdouble a)
 {
     a = a*10;
-    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(0, 0, 1.0));
+    rotateRoll(a);
+//    viewMat = rotate(viewMat, glm::radians(-a), glm::dvec3(0, 0, 1.0));
 }
 //-------------------------------------------------------------------------
 
@@ -137,7 +142,7 @@ void Camera::moveFB(GLdouble cs) // Forward / Backward
 
 void Camera::moveUD(GLdouble cs) // Up / Down
 {
-    eye = eye + (down * cs);
+    eye = eye + (up * cs);
     viewMat = lookAt(eye, eye + front, up);
 }
 
@@ -157,6 +162,20 @@ void Camera::rotatePY(GLdouble offsetP, GLdouble offsetY) {
     viewMat = lookAt(eye, eye + front, up);
     right = (normalize(cross(up,-front))); // ortogonal a up y n
 }
+
+
+void Camera::rotateRoll(GLdouble offsetR) {
+    rollAttribute+= offsetR;
+   
+    // Actualizar la direcci—n de vista
+    top.x = cos(radians(rollAttribute));
+    top.y = sin(radians(rollAttribute));
+    
+    viewMat = lookAt(eye, eye + front, top);
+    updateFrontRight();
+}
+
+
 
 
 void Camera::changeOrto(){

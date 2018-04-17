@@ -122,7 +122,6 @@ class GlassPot : public Entity
 {
 public:
     GlassPot(GLdouble l);
-    virtual void render(glm::dmat4 const& modelViewMat);
     ~GlassPot() { };
     virtual void draw();
 };
@@ -132,7 +131,7 @@ class Grass : public Entity
 {
 public:
     Grass(GLdouble l);
-//    virtual void render(glm::dmat4 const& modelViewMat);
+    virtual void render(glm::dmat4 const& modelViewMat);
     ~Grass() { };
     virtual void draw();
 };

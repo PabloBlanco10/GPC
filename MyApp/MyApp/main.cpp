@@ -133,16 +133,28 @@ void key(unsigned char key, int x, int y)
             texture.save("prueba");
             break;
         case 'A':
-            camera.moveLR(-100.0);
+            camera.moveLR(100.0);
             break;
         case 'D':
-            camera.moveLR(100.0);
+            camera.moveLR(-100.0);
             break;
         case 'W':
             camera.moveFB(100.0);
             break;
         case 'S':
             camera.moveFB(-100.0);
+            break;
+        case 'M':
+            camera.moveUD(-100.0);
+            break;
+        case 'N':
+            camera.moveUD(100.0);
+            break;
+        case 'Z':
+            camera.roll(-1);
+            break;
+        case 'X':
+            camera.roll(1);
             break;
         case 'p':
             camera.changeOrto();
@@ -173,7 +185,6 @@ void specialKey(int key, int x, int y)
         case GLUT_KEY_UP:
 //            camera.roll(1);    // rotate 1 on the Z axis
             camera.pitch(-1);   // rotate 1 on the X axis
-
             break;
         case GLUT_KEY_DOWN:
 //            camera.roll(-1);   // rotate -1 on the Z axis

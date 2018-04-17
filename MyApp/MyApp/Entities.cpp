@@ -309,29 +309,6 @@ void GlassPot::draw()
 
 }
 
-void GlassPot::render(const glm::dmat4 &modelViewMat){
-    glMatrixMode(GL_MODELVIEW);
-    
-    dmat4 aMat = modelViewMat * modelMat;
-    glLoadMatrixd(value_ptr(aMat));
-    draw();
-    
-    
-    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
-    glLoadMatrixd(value_ptr(aMat));
-    draw();
-    
-    aMat = modelViewMat * modelMat;
-    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
-    glLoadMatrixd(value_ptr(aMat));
-    draw();
-    
-    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 0.0, 1.0));
-    glLoadMatrixd(value_ptr(aMat));
-    draw();
-}
-
-
 //-------------------------------------------------------------------------
 
 
@@ -339,9 +316,7 @@ Grass::Grass(GLdouble l): Entity()
 {
 
     modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
-//    modelMat = rotate(modelMat, radians(180.0), dvec3(0.0,1.0,0.0));
     texture.load("Bmps/grass.bmp", ivec3(0,0,0), 0);
-
     mesh = Mesh::generateRectanguloTex(l, l, 1, 1);
 }
 //-------------------------------------------------------------------------
@@ -358,24 +333,19 @@ void Grass::draw()
     glDepthMask(GL_TRUE);
 }
 
-//void Grass::render(const glm::dmat4 &modelViewMat){
-//    glMatrixMode(GL_MODELVIEW);
-//
-//    dmat4 aMat = modelViewMat * modelMat;
-//    glLoadMatrixd(value_ptr(aMat));
-//    draw();
-//
-//
-//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
-//    glLoadMatrixd(value_ptr(aMat));
-//    draw();
-//
-//    aMat = modelViewMat * modelMat;
-//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 1.0, 0.0));
-//    glLoadMatrixd(value_ptr(aMat));
-//    draw();
-//
-//    aMat = rotate(aMat, radians(180.0), dvec3(0.0, 0.0, 1.0));
-//    glLoadMatrixd(value_ptr(aMat));
-//    draw();
-//}
+
+void Grass::render(const glm::dmat4 &modelViewMat){    
+    glMatrixMode(GL_MODELVIEW);
+    dmat4 aMat = modelViewMat * modelMat;
+    glLoadMatrixd(value_ptr(aMat));
+    draw();
+    aMat = rotate(aMat, radians(45.0), dvec3(0.0, 1.0, 0.0));
+    glLoadMatrixd(value_ptr(aMat));
+    draw();
+    aMat = rotate(aMat, radians(45.0), dvec3(0.0, 1.0, 0.0));
+    glLoadMatrixd(value_ptr(aMat));
+    draw();
+    aMat = rotate(aMat, radians(45.0), dvec3(0.0, 1.0, 0.0));
+    glLoadMatrixd(value_ptr(aMat));
+    draw();
+}

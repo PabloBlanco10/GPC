@@ -65,6 +65,8 @@ public:
 
 
     void rotatePY(GLdouble offsetP,GLdouble offsetY);
+    void rotateRoll(GLdouble offsetR);
+
 
 protected:
     glm::dvec3 eye = { 0.0, 0.0, 500.0 };
@@ -75,8 +77,10 @@ protected:
 //    dvec3 front, right; // front = -n y right = u
     glm::dvec3 front, right;
 	glm::dvec3 down;
+    glm::dvec3 top = up;
+
     
-    GLdouble pitchAttribute, yawAttribute;
+    GLdouble pitchAttribute, yawAttribute, rollAttribute;
     
     bool orto = true;
     
