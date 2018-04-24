@@ -136,6 +136,17 @@ public:
     virtual void draw();
 };
 
+class MPR : public Entity
+{
+public:
+    MPR(int n);
+    ~MPR() { };
+    virtual void draw();
+protected:
+    int m;
+    int n;
+};
+
 //-------------------------------------------------------------------------
 
 #endif //_H_Entities_H_

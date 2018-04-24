@@ -5,13 +5,27 @@
 
 void Scene::init()
 { // OpenGL basic setting
-    glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
+    //glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
+    glClearColor(0.6f, 0.7f, 0.8f, 1.0);
     glEnable(GL_DEPTH_TEST);
-	glEnable(GL_TEXTURE_2D);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_COLOR_MATERIAL);
+    glEnable(GL_LIGHTING);
+    glEnable(GL_LIGHT0);  // Light0
+    GLfloat d[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
+    GLfloat a[] = { 0.3f, 0.3f, 0.3f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_AMBIENT, a);
+    GLfloat s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_SPECULAR, s);
+    GLfloat p[] = { 50.0f, 50.0f, 50.0f, 1.0f };
+    glLightfv(GL_LIGHT0, GL_POSITION, p);
     
     
+    camera->set3D();
     
-    camera->setAZ();
+    
+    //camera->setAZ();
     
     // lights
     // textures
@@ -22,18 +36,19 @@ void Scene::init()
     
     //0
     objetos.push_back(new EjesRGB(350));
-    objetos.push_back(new Triangle(200.0));
-    objetos.push_back(new TriangleRGB(200.0));
-    objetos.push_back(new TriPyramid(200.0, 300.0));
-    objetos.push_back(new ContCubo(200.0));
-//    //5
-    objetos.push_back(new Diabolo(100.0, 150.0));
-    objetos.push_back(new Rectangulo(200.0, 200.0, 0, 0));
-    objetos.push_back(new Suelo(1200.0, 1200.0));
-    objetos.push_back(new Cubo(200.0));
-    objetos.push_back(new Grass(100.0));
-    //10
-    objetos.push_back(new GlassPot(200.0));
+//    objetos.push_back(new Triangle(200.0));
+//    objetos.push_back(new TriangleRGB(200.0));
+//    objetos.push_back(new TriPyramid(200.0, 300.0));
+//    objetos.push_back(new ContCubo(200.0));
+////    //5
+//    objetos.push_back(new Diabolo(100.0, 150.0));
+//    objetos.push_back(new Rectangulo(200.0, 200.0, 0, 0));
+//    objetos.push_back(new Suelo(1200.0, 1200.0));
+//    objetos.push_back(new Cubo(200.0));
+//    objetos.push_back(new Grass(100.0));
+//    //10
+//    objetos.push_back(new GlassPot(200.0));
+    objetos.push_back(new MPR(20));
 
 
     
@@ -70,17 +85,18 @@ void Scene::render()
 	//////////////////////////////
 	//      RENDERIZAR OBJETOS
 	////////////////////////////////
-//    auto &it = objetos;
+    auto &it = objetos;
 //    //
-//    it[0]->render(camera->getViewMat());
+    it[0]->render(camera->getViewMat());
+    it[1]->render(camera->getViewMat());
 //    it[8]->render(camera->getViewMat());
 //    it[7]->render(camera->getViewMat());
 
     //////////////////////////////
     //      PARA PRACTICA1
     //////////////////////////////
-            renderScenario();
-
+           // renderScenario();
+    
 	//////////////////////////////
 	//      PARA CUBO CON TAPA
 	//////////////////////////////

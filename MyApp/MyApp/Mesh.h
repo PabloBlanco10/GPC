@@ -21,6 +21,7 @@ public:
     static Mesh * generateRectangulo(GLdouble w,GLdouble h);
     static Mesh * generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH);
 	static Mesh * generateCuboTex(GLdouble l);
+    static Mesh * generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil);
     
     Mesh(void) { };
     ~Mesh(void);

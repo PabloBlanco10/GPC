@@ -1,5 +1,9 @@
 #include "Mesh.h"
 
+#define USE_MATH_DEFINE
+#include <math.h>
+
+
 using namespace glm;
 
 //-------------------------------------------------------------------------
@@ -236,6 +240,30 @@ Mesh * Mesh::generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLd
     
 }
 
+Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
+    Mesh* mesh = new Mesh();
+    mesh->type = GL_LINE_LOOP;
+    mesh->numVertices = n*m;
+    mesh->vertices = new dvec3[mesh->numVertices];
+    
+    // Vertices de la malla
+    for (int i=0; i<n; i++){ // Generar el perfil i-ésimo
+        double theta = i*2*(3.14)/ n;
+        double c = cos(theta);
+        double s = sin(theta);
+        // R_y es la matriz de rotación sobre el eje Y
+        for (int j=0; j<m; j++) {
+            int indice = i*m+j;
+            // Transformar el punto j-ésimo del perfil original
+            double x = c*perfil[j][0] + s*perfil[j][2];
+            double z = -s*perfil[j][0] + c*perfil[j][2];
+            dvec3 p = dvec3(x, perfil[j].y, z);
+            mesh->vertices[indice] = p;
+        }
+    }
+    
+    return mesh;
+}
 
 
 
