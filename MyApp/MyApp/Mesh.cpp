@@ -1,5 +1,9 @@
 #include "Mesh.h"
 
+#define USE_MATH_DEFINE
+#include <math.h>
+
+
 using namespace glm;
 
 //-------------------------------------------------------------------------
@@ -234,7 +238,6 @@ Mesh * Mesh::generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLd
     
 }
 
-
 Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
     Mesh* mesh = new Mesh();
 //    mesh->type = GL_LINE_LOOP;
@@ -284,4 +287,5 @@ void Mesh::normalize (int mm, int nn){
     }
     
 }
+
 

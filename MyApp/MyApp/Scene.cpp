@@ -24,7 +24,6 @@ void Scene::init()
     camera->set3D();
     
     //    camera->setAZ();
-    
     // lights
     // textures
     //    glEnable(GL_TEXTURE_2D);
@@ -47,7 +46,7 @@ void Scene::init()
     //10
     //    objetos.push_back(new GlassPot(200.0));
     objetos.push_back(new MPR(20));
- 
+
 }
 //-------------------------------------------------------------------------
 

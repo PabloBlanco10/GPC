@@ -135,9 +135,6 @@ public:
     virtual void draw();
 };
 
-
-
-
 class MPR : public Entity
 {
 public:
@@ -148,7 +145,6 @@ public:
 protected:
     int m;
     int n;
-
 };
 
 //-------------------------------------------------------------------------
