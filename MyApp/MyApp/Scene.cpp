@@ -150,7 +150,7 @@ void Scene::rotarDiabolo(){
 
 void Scene::renderPractica2(){
     auto &it = objetos;
-    it[0]->render(camera->getViewMat());
+  //  it[0]->render(camera->getViewMat());
     it[1]->render(camera->getViewMat());
 }
 

@@ -246,7 +246,7 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
     
     // Vertices de la malla
     for (int i=0; i<n; i++){ // Generar el perfil i-ésimo
-        double theta = i*2*3.141592653589793238 / n;
+        double theta = i*2*3.141592653589793238 / (double)n;
         double c = cos(theta);
         double s = sin(theta);
         // R_y es la matriz de rotación sobre el eje Y
@@ -255,7 +255,7 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
             // Transformar el punto j-ésimo del perfil original
             double x = c*perfil[j][0] + s*perfil[j][2];
             double z = -s*perfil[j][0] + c*perfil[j][2];
-            dvec3 p = glm::dvec3(x, perfil[j].y, z);
+            dvec3 p = glm::dvec3(x, perfil[j][1], z);
             mesh->vertices[indice] = p;
         }
     }
@@ -264,16 +264,19 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
 }
 
 void Mesh::normalize (int mm, int nn){
-    normals = new dvec3[numVertices];
+    normals = new dvec3[mm*nn];
+    for(int i = 0; i < mm*nn; i++){
+        normals[i] = dvec3(0,0,0);
+    }
     // Se ponen al vector nulo todas las componentes de normals
     for (int i = 0; i < nn; i++)
         for (int j = 0; j < mm-1; j++) {
             int indice = i*mm + j;
             // Por cada cara a la que pertenece el vértice índice,
             // se determinan 3 índices i0, i1, i2 de 3 vértices consecutivos de esa cara
-            dvec3 aux0 = normals[indice];//vértice de i0;
-            dvec3 aux1 = normals[(indice+mm) % numVertices];
-            dvec3 aux2 = normals[(indice+mm+1) % numVertices];
+            dvec3 aux0 = vertices[indice];//vértice de i0;
+            dvec3 aux1 = vertices[(indice+mm) % (mm*nn)];
+            dvec3 aux2 = vertices[(indice+mm+1) % (mm*nn)];
             dvec3 norm = glm::cross(aux2 - aux1, aux0 - aux1);
             normals[indice] += norm;
             normals[(indice+mm) % (nn*mm)] += norm;
