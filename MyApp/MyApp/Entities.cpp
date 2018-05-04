@@ -351,12 +351,12 @@ void Grass::render(const glm::dmat4 &modelViewMat){
 
 MPR::MPR(int n) {
     //    glPolygonMode(GL_FRONT, GL_FILL);
-    glColor3d(1.0, 1.0, 1.0);
+    glColor3d(0.0, 0.0, 1.0);
     this->m = 3; //número de puntos del perfil //mm
     this->n = n;
-    dvec3* perfil = new dvec3[this->m];
+    dvec3* perfil = new dvec3[m];
     perfil[0] = dvec3(0, 0, 0);
-    perfil[1] = dvec3(20, 0, 0);
+    perfil[1] = dvec3(30, 0, 0);
     perfil[2] = dvec3(0, 50, 0);
     
     this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
@@ -366,25 +366,33 @@ MPR::MPR(int n) {
 void MPR::draw() {
     //    ...
     dvec3* vertices = mesh->getVertices();
-    dvec4* colors = mesh->getColours();
+    //dvec4* colors = mesh->getColours();
+    dvec3* normals = mesh-> getNormals();
     if (vertices != nullptr) {
         glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
         glVertexPointer(3, GL_DOUBLE, 0, vertices);
-        if (colors != nullptr) {
-            glEnableClientState(GL_COLOR_ARRAY);
-            glColorPointer(4, GL_DOUBLE, 0, colors);
+//        if (colors != nullptr) {
+//            glEnableClientState(GL_COLOR_ARRAY);
+//            glColorPointer(4, GL_DOUBLE, 0, colors);
+//
+//        }
+        
+        //if (normals != nullptr){
+        
+        glNormalPointer(GL_DOUBLE, 0, normals);
             
-        }
+       // }
     }
     
     // Después del dibujo de los elementos por índices,
     // se deshabilitan los vertex arrays, como es habitual
     //        ...
     // Definición de las caras
-    for (int i=0; i<this->n; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
-        for (int j=0; j<this->m-1; j++) { // Esquina inferior-izquierda de una cara
-            int indice = i*this->m+j;
-            int stripIndices[] = {indice, (indice + this->m) % (this->n*this->m),(indice + this->m + 1) % (this->n*this->m), indice + 1};
+    for (int i=0; i< n; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
+        for (int j=0; j<(m-1); j++) { // Esquina inferior-izquierda de una cara
+            int indice = i*m+j;
+            int stripIndices[] = {indice, (indice + m) %(n*m),(indice + m + 1) %(n*m), indice + 1};
 //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
             glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
             // o GL_POLYGON, si se quiere las caras con relleno
@@ -392,4 +400,6 @@ void MPR::draw() {
     }
     
     glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+
 }

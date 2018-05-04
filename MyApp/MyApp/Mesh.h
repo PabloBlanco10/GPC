@@ -33,6 +33,7 @@ public:
     virtual void draw();
     glm::dvec3 * getVertices() { return vertices; };
     glm::dvec4 * getColours() { return colors; };
+    glm::dvec3 * getNormals() { return normals; };
     
 protected:
     GLuint numVertices = 0;
