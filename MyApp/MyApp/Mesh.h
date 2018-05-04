@@ -22,6 +22,12 @@ public:
     static Mesh * generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH);
 	static Mesh * generateCuboTex(GLdouble l);
     
+//m: número de puntos del perfil
+//perfil: perfil original en el plano XY
+//n: número de rotaciones (muestras) que se toman
+    static Mesh * generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil);
+    void normalize (int mm, int nn);
+    
     Mesh(void) { };
     ~Mesh(void);
     virtual void draw();
@@ -34,6 +40,7 @@ protected:
     glm::dvec3 * vertices = nullptr;
     glm::dvec4 * colors = nullptr;
     glm::dvec2 * texCoords = nullptr;
+    glm::dvec3 * normals = nullptr;
 };
 
 //-------------------------------------------------------------------------

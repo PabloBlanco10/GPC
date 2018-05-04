@@ -95,8 +95,8 @@ TriPyramid::TriPyramid(GLdouble r,GLdouble h): Entity()
     mesh = Mesh::generateTriPyramidTex(r, h);
     //    mesh = Mesh::generateTriPyramid(r, h);
     texture.load("Bmps/floris.bmp");
-//    texture.load("..\\Bmps\\floris.bmp");
-
+    //    texture.load("..\\Bmps\\floris.bmp");
+    
 }
 //-------------generateTriPyramid---------------------------------------
 
@@ -134,7 +134,7 @@ Diabolo::Diabolo(GLdouble r,GLdouble h): Entity()
     height = h;
     mesh = Mesh::generateTriPyramidTex(r, h);
     texture.load("Bmps/floris.bmp");
-//    texture.load("..\\Bmps\\floris.bmp");
+    //    texture.load("..\\Bmps\\floris.bmp");
 }
 //-------------------------------------------------------------------------
 
@@ -182,18 +182,18 @@ void Diabolo::rotateDiabolo(){
 
 Rectangulo::Rectangulo(GLdouble w,GLdouble h, GLdouble replicaW, GLdouble replicaH): Entity()
 {
-
+    
     mesh = Mesh::generateRectanguloTex(w, h, 0, 0);
     texture.load("Bmps/container.bmp");
-//    texture.load("..\\Bmps\\container.bmp");
-
+    //    texture.load("..\\Bmps\\container.bmp");
+    
 }
 //-------------------------------------------------------------------------
 
 void Rectangulo::draw()
 {
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
-
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_FILL);
+    
     texture.bind();
     mesh->draw();
     texture.unbind();
@@ -208,16 +208,16 @@ Cubo::Cubo(GLdouble h): Entity()
     modelMat = translate(modelMat, dvec3(-height/2,0,0));
     texture.load("Bmps/container.bmp");
     textureIn.load("Bmps/chuches.bmp");
-//    texture.load("..\\Bmps\\container.bmp");
+    //    texture.load("..\\Bmps\\container.bmp");
     mesh = Mesh::generateCuboTex(h);
     rectanguloMesh = Mesh::generateRectanguloTex(h, h, 1, 1);
 }
 
 void Cubo::drawMesh()
 {
-	texture.bind();
+    texture.bind();
     mesh->draw();
-	texture.unbind();
+    texture.unbind();
 }
 
 void Cubo::drawRectanguloMesh()
@@ -245,19 +245,19 @@ void Cubo::render(const glm::dmat4 &modelViewMat){
     glDisable(GL_CULL_FACE);
     glPolygonMode(GL_BACK, GL_FILL);
     drawMeshIn();
-
+    
     //glPolygonMode(GL_FRONT, GL_LINE);
     //glPolygonMode(GL_BACK, GL_POINT);
-
+    
     aMat = modelViewMat * modelMat;
     aMat = translate(aMat ,dvec3(0,height*0.85,0));
     aMat = translate(aMat ,dvec3(0,0,-(height*0.15)));
     aMat = rotate(aMat, radians(45.0), dvec3(1.0,0.0,0.0));
-
+    
     glLoadMatrixd(value_ptr(aMat));
     drawRectanguloMesh();
     glPolygonMode(GL_FRONT, GL_FILL);
-
+    
 }
 
 
@@ -306,7 +306,7 @@ void GlassPot::draw()
     texture.unbind();
     glDisable(GL_BLEND);
     glDepthMask(GL_TRUE);
-
+    
 }
 
 //-------------------------------------------------------------------------
@@ -314,8 +314,7 @@ void GlassPot::draw()
 
 Grass::Grass(GLdouble l): Entity()
 {
-
-    modelMat = translate(modelMat, dvec3(500.0, 0.0, -500.0));
+    modelMat = translate(modelMat, dvec3(500.0, -l/2, -500.0));
     texture.load("Bmps/grass.bmp", ivec3(0,0,0), 0);
     mesh = Mesh::generateRectanguloTex(l, l, 1, 1);
 }
@@ -348,4 +347,49 @@ void Grass::render(const glm::dmat4 &modelViewMat){
     aMat = rotate(aMat, radians(45.0), dvec3(0.0, 1.0, 0.0));
     glLoadMatrixd(value_ptr(aMat));
     draw();
+}
+
+MPR::MPR(int n) {
+    //    glPolygonMode(GL_FRONT, GL_FILL);
+    glColor3d(1.0, 1.0, 1.0);
+    this->m = 3; //número de puntos del perfil //mm
+    this->n = n;
+    dvec3* perfil = new dvec3[this->m];
+    perfil[0] = dvec3(0, 0, 0);
+    perfil[1] = dvec3(20, 0, 0);
+    perfil[2] = dvec3(0, 50, 0);
+    
+    this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
+}
+
+
+void MPR::draw() {
+    //    ...
+    dvec3* vertices = mesh->getVertices();
+    dvec4* colors = mesh->getColours();
+    if (vertices != nullptr) {
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glVertexPointer(3, GL_DOUBLE, 0, vertices);
+        if (colors != nullptr) {
+            glEnableClientState(GL_COLOR_ARRAY);
+            glColorPointer(4, GL_DOUBLE, 0, colors);
+            
+        }
+    }
+    
+    // Después del dibujo de los elementos por índices,
+    // se deshabilitan los vertex arrays, como es habitual
+    //        ...
+    // Definición de las caras
+    for (int i=0; i<this->n; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
+        for (int j=0; j<this->m-1; j++) { // Esquina inferior-izquierda de una cara
+            int indice = i*this->m+j;
+            int stripIndices[] = {indice, (indice + this->m) % (this->n*this->m),(indice + this->m + 1) % (this->n*this->m), indice + 1};
+//            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
+            glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+            // o GL_POLYGON, si se quiere las caras con relleno
+        }
+    }
+    
+    glDisableClientState(GL_VERTEX_ARRAY);
 }

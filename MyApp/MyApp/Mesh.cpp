@@ -19,8 +19,8 @@ void Mesh::draw()
         if (colors != nullptr) {
             glEnableClientState(GL_COLOR_ARRAY);
             glColorPointer(4, GL_DOUBLE, 0, colors);   // number of coordinates per color, type of each coordinate
-        
-}
+            
+        }
         if(texCoords != nullptr){
             glEnableClientState(GL_TEXTURE_COORD_ARRAY);
             glTexCoordPointer(2, GL_DOUBLE, 0, texCoords);
@@ -29,11 +29,9 @@ void Mesh::draw()
         
         glDisableClientState(GL_TEXTURE_COORD_ARRAY);
         glDisableClientState(GL_COLOR_ARRAY);
+
+    }
     
-
-
-}
-   
 }
 //-------------------------------------------------------------------------
 
@@ -124,7 +122,7 @@ Mesh * Mesh::generateTriPyramid(GLdouble r,GLdouble h){
     m->vertices[4] = dvec3(r*cos(radians(valor)),r* sin(radians(valor)) , 0.0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     //quitamos los colores para pintar el diabolo
     //    m->colors = new dvec4[m->numVertices];
@@ -145,7 +143,7 @@ Mesh * Mesh::generateTriPyramidTex(GLdouble r,GLdouble h){
     m->texCoords[2] = dvec2(1, 1);
     m->texCoords[3] = dvec2(1, 0);
     m->texCoords[4] = dvec2(0, 1);
-
+    
     return m;
 }
 
@@ -154,7 +152,7 @@ Mesh * Mesh::generateContCubo(GLdouble l){
     Mesh *m = new Mesh();
     m->type = GL_TRIANGLE_STRIP;
     m->numVertices = 10;
-
+    
     m->vertices = new dvec3[m->numVertices];
     m->vertices[0] = dvec3(-(l/2), l/2, l/2);
     m->vertices[1] = dvec3(-(l/2), -(l/2), l/2);
@@ -213,7 +211,7 @@ Mesh * Mesh::generateRectangulo(GLdouble w,GLdouble h){
     m->vertices[3] = dvec3(w/2, -(h/2), 0);
     
     //sirve para pintar solo las lineas y dibujarlo vacio
-//    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
+    //    glPolygonMode(GL_FRONT_AND_BACK, GL_LINE);
     
     m->colors = new dvec4[m->numVertices];
     m->colors[0] = dvec4(1.0, 0.0, 0.0, 1.0);
@@ -237,5 +235,53 @@ Mesh * Mesh::generateRectanguloTex(GLdouble w,GLdouble h, GLdouble replicaW, GLd
 }
 
 
+Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
+    Mesh* mesh = new Mesh();
+//    mesh->type = GL_LINE_LOOP;
+    mesh->numVertices = n*m;
+    mesh->vertices = new dvec3[mesh->numVertices];
+    
+    // Vertices de la malla
+    for (int i=0; i<n; i++){ // Generar el perfil i-ésimo
+        double theta = i*2*3.141592653589793238 / n;
+        double c = cos(theta);
+        double s = sin(theta);
+        // R_y es la matriz de rotación sobre el eje Y
+        for (int j=0; j<m; j++) {
+            int indice = i*m+j;
+            // Transformar el punto j-ésimo del perfil original
+            double x = c*perfil[j][0] + s*perfil[j][2];
+            double z = -s*perfil[j][0] + c*perfil[j][2];
+            dvec3 p = glm::dvec3(x, perfil[j].y, z);
+            mesh->vertices[indice] = p;
+        }
+    }
+    mesh->normalize(m, n);
+    return mesh;
+}
 
+void Mesh::normalize (int mm, int nn){
+    normals = new dvec3[numVertices];
+    // Se ponen al vector nulo todas las componentes de normals
+    for (int i = 0; i < nn; i++)
+        for (int j = 0; j < mm-1; j++) {
+            int indice = i*mm + j;
+            // Por cada cara a la que pertenece el vértice índice,
+            // se determinan 3 índices i0, i1, i2 de 3 vértices consecutivos de esa cara
+            dvec3 aux0 = normals[indice];//vértice de i0;
+            dvec3 aux1 = normals[(indice+mm) % numVertices];
+            dvec3 aux2 = normals[(indice+mm+1) % numVertices];
+            dvec3 norm = glm::cross(aux2 - aux1, aux0 - aux1);
+            normals[indice] += norm;
+            normals[(indice+mm) % (nn*mm)] += norm;
+            normals[(indice+mm+1) % (nn*mm)] += norm;
+            normals[indice+1] += norm;
+            
+        }
+    // Finalmente, se normalizan todos los vectores normales
+    for(int i = 0; i < mm*nn; i++){
+        normals[i] = glm::normalize(normals[i]);
+    }
+    
+}
 

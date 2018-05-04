@@ -21,6 +21,9 @@ public:
     void renderDiaboloWithAxes();
     void renderCubeWithAxes();
     void renderScenario();
+    void renderPractica2();
+
+    
 
     
 protected:

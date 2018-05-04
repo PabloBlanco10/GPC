@@ -15,7 +15,6 @@ class Entity
 public:
     Entity() : modelMat(1.0) { };
     virtual ~Entity() { delete mesh; };
-    
     virtual void render(glm::dmat4 const& modelViewMat);
     
 protected:
@@ -134,6 +133,22 @@ public:
     virtual void render(glm::dmat4 const& modelViewMat);
     ~Grass() { };
     virtual void draw();
+};
+
+
+
+
+class MPR : public Entity
+{
+public:
+    MPR(int n);
+    ~MPR() { };
+    virtual void draw();
+//    virtual void render(glm::dmat4 const& modelViewMat);
+protected:
+    int m;
+    int n;
+
 };
 
 //-------------------------------------------------------------------------
