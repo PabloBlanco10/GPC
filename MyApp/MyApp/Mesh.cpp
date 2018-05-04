@@ -292,3 +292,28 @@ void Mesh::normalize (int mm, int nn){
 }
 
 
+
+dvec3 HipoMesh::curva(GLdouble t){
+    return dvec3((a - b) * cos(t) + c * cos(t * ((a - b) / b )),
+                 0,
+                 (a - b) * sin(t) - c * sin(t * ((a - b) / b )));
+}
+
+dvec3 HipoMesh::derivada(GLdouble t){
+    return dvec3(- (a - b) * sin(t) - c * ((a - b) / b) * sin(t * ((a - b) / b )),
+                 0,
+                 (a - b) * cos(t) - c * ((a - b) / b) * cos(t * ((a - b) / b )));
+}
+
+dvec3 HipoMesh::segundaDerivada(GLdouble t){
+    return dvec3(- (a - b) * cos(t) - c * ((a - b) / b) * ((a - b) / b) *  cos(t * ((a - b) / b )),
+                 0,
+                 - (a - b) * sin(t) - c * ((a - b) / b) * ((a - b) / b) * sin(t * ((a - b) / b )));
+}
+
+//dvec3 HipoMesh::cargaN(dvec3 v){
+//
+//}
+
+
+
