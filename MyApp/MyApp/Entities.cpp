@@ -356,7 +356,7 @@ MPR::MPR(int n) {
     this->n = n;
     dvec3* perfil = new dvec3[m];
     perfil[0] = dvec3(0, 0, 0);
-    perfil[1] = dvec3(30, 0, 0);
+    perfil[1] = dvec3(20, 0, 0);
     perfil[2] = dvec3(0, 50, 0);
     
     this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);

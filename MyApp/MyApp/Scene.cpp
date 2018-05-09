@@ -6,7 +6,7 @@
 void Scene::init()
 { // OpenGL basic setting
 //    glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
-//    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_DEPTH_TEST);
 //    glEnable(GL_TEXTURE_2D);
 //
     glClearColor(0.6f, 0.7f, 0.8f, 1.0); // Fondo azul (o el que prefieras)
