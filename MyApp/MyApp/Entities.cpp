@@ -360,6 +360,7 @@ MPR::MPR(int n) {
     perfil[2] = dvec3(0, 50, 0);
     
     this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
+    mesh->normalize(m, n);
 }
 
 
@@ -372,6 +373,8 @@ void MPR::draw() {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
         glVertexPointer(3, GL_DOUBLE, 0, vertices);
+        glNormalPointer(GL_DOUBLE, 0, normals);
+
 //        if (colors != nullptr) {
 //            glEnableClientState(GL_COLOR_ARRAY);
 //            glColorPointer(4, GL_DOUBLE, 0, colors);
@@ -380,8 +383,7 @@ void MPR::draw() {
         
         //if (normals != nullptr){
         
-        glNormalPointer(GL_DOUBLE, 0, normals);
-            
+        
        // }
     }
     

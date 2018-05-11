@@ -246,7 +246,7 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
     
     // Vertices de la malla
     for (int i=0; i<n; i++){ // Generar el perfil i-ésimo
-        double theta = i*2*3.141592653589793238 / (double)n;
+        double theta = i*2*3.1416 / (double)n;
         double c = cos(theta);
         double s = sin(theta);
         // R_y es la matriz de rotación sobre el eje Y
@@ -255,39 +255,49 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
             // Transformar el punto j-ésimo del perfil original
             double x = c*perfil[j][0] + s*perfil[j][2];
             double z = -s*perfil[j][0] + c*perfil[j][2];
-            dvec3 p = glm::dvec3(x, perfil[j][1], z);
+            dvec3 p = glm::dvec3(x, perfil[j].y, z);
             mesh->vertices[indice] = p;
         }
     }
-    mesh->normalize(m, n);
+//    mesh->normalize(m, n);
     return mesh;
 }
 
 void Mesh::normalize (int mm, int nn){
-    normals = new dvec3[mm*nn];
-    for(int i = 0; i < mm*nn; i++){
+    normals = new dvec3[numVertices];
+    /*for(int i = 0; i < mm*nn; i++){
         normals[i] = dvec3(0,0,0);
-    }
+    }*/
     // Se ponen al vector nulo todas las componentes de normals
     for (int i = 0; i < nn; i++)
         for (int j = 0; j < mm-1; j++) {
             int indice = i*mm + j;
             // Por cada cara a la que pertenece el vértice índice,
             // se determinan 3 índices i0, i1, i2 de 3 vértices consecutivos de esa cara
+            int i0 = (indice+mm) % (nn*mm);
+            int i1 = (indice+mm+1) % (nn*mm);
+            int i2 = indice + 1;
+            
             dvec3 aux0 = vertices[indice];//vértice de i0;
-            dvec3 aux1 = vertices[(indice+mm) % (mm*nn)];
-            dvec3 aux2 = vertices[(indice+mm+1) % (mm*nn)];
+            dvec3 aux1 = vertices[i0];
+            dvec3 aux2 = vertices[i1];
+            
             dvec3 norm = glm::cross(aux2 - aux1, aux0 - aux1);
             normals[indice] += norm;
-            normals[(indice+mm) % (nn*mm)] += norm;
-            normals[(indice+mm+1) % (nn*mm)] += norm;
-            normals[indice+1] += norm;
+            normals[i0] += norm;
+            normals[i1] += norm;
+            normals[i2] += norm;
             
         }
     // Finalmente, se normalizan todos los vectores normales
-    for(int i = 0; i < mm*nn; i++){
-        normals[i] = glm::normalize(normals[i]);
+    for (int i = 0; i < nn; i++){
+        for(int j = 0; j < mm; j++){
+            normals[i * mm + j] = glm::normalize(normals[i * mm + j]);
+        }
     }
+//    for(int i = 0; i < mm*nn; i++){
+//        normals[i] = glm::normalize(normals[i]);
+//    }
     
 }
 

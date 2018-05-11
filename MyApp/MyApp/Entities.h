@@ -141,10 +141,12 @@ public:
     MPR(int n);
     ~MPR() { };
     virtual void draw();
+//    virtual void normalize();
 //    virtual void render(glm::dmat4 const& modelViewMat);
 protected:
     int m;
     int n;
+//    glm::dvec3 * perfil;
 };
 
 //-------------------------------------------------------------------------
