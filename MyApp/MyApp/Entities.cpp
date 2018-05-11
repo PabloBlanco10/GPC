@@ -405,3 +405,58 @@ void MPR::draw() {
     glDisableClientState(GL_NORMAL_ARRAY);
 
 }
+
+Hipotrocoide::Hipotrocoide() : Entity() {
+    
+    //    glPolygonMode(GL_FRONT, GL_FILL);
+    glColor3d(0.0, 0.0, 1.0);
+    mesh = new HipoMesh(20,200,7,4,2);
+    
+    //mesh->normalize(m, n);
+    
+    
+}
+
+void Hipotrocoide::draw(){
+    
+    dvec3* vertices = mesh->getVertices();
+    //dvec4* colors = mesh->getColours();
+    dvec3* normals = mesh-> getNormals();
+    if (vertices != nullptr) {
+        glEnableClientState(GL_VERTEX_ARRAY);
+        glEnableClientState(GL_NORMAL_ARRAY);
+        glVertexPointer(3, GL_DOUBLE, 0, vertices);
+        glNormalPointer(GL_DOUBLE, 0, normals);
+        
+        //        if (colors != nullptr) {
+        //            glEnableClientState(GL_COLOR_ARRAY);
+        //            glColorPointer(4, GL_DOUBLE, 0, colors);
+        //
+        //        }
+        
+        //if (normals != nullptr){
+        
+        
+        // }
+    }
+    
+    // Después del dibujo de los elementos por índices,
+    // se deshabilitan los vertex arrays, como es habitual
+    //        ...
+    // Definición de las caras
+    for (int i=0; i< nQ; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
+        for (int j=0; j<(nP-1); j++) { // Esquina inferior-izquierda de una cara
+            int indice = i*nP+j;
+            int stripIndices[] = {indice, (indice + nP) %(nQ*nP),(indice + nP + 1) %(nQ*nP), indice + 1};
+            //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
+            glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+            // o GL_POLYGON, si se quiere las caras con relleno
+        }
+    }
+    
+    glDisableClientState(GL_VERTEX_ARRAY);
+    glDisableClientState(GL_NORMAL_ARRAY);
+    
+    
+}
+

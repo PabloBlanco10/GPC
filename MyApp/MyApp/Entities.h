@@ -148,7 +148,21 @@ protected:
     int n;
 //    glm::dvec3 * perfil;
 };
+class Hipotrocoide : public Entity
+{
+public:
+    Hipotrocoide();
+    ~Hipotrocoide() { };
+    virtual void draw();
 
+protected:
+
+    int nP;
+    int nQ;
+    GLfloat a, b, c;
+   
+
+};
 //-------------------------------------------------------------------------
 
 #endif //_H_Entities_H_

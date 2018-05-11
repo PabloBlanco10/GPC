@@ -46,6 +46,7 @@ void Scene::init()
     //10
     //    objetos.push_back(new GlassPot(200.0));
     objetos.push_back(new MPR(20));
+    objetos.push_back(new Hipotrocoide());
 
 }
 //-------------------------------------------------------------------------
@@ -150,8 +151,9 @@ void Scene::rotarDiabolo(){
 
 void Scene::renderPractica2(){
     auto &it = objetos;
-  //  it[0]->render(camera->getViewMat());
-    it[1]->render(camera->getViewMat());
+    //it[0]->render(camera->getViewMat());
+    //it[1]->render(camera->getViewMat());
+    it[2]->render(camera->getViewMat());
 }
 
 //-------------------------------------------------------------------------
