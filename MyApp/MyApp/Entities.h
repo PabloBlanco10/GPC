@@ -151,7 +151,7 @@ protected:
 class Hipotrocoide : public Entity
 {
 public:
-    Hipotrocoide();
+    Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo);
     ~Hipotrocoide() { };
     virtual void draw();
 

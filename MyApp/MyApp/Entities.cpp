@@ -406,14 +406,19 @@ void MPR::draw() {
 
 }
 
-Hipotrocoide::Hipotrocoide() : Entity() {
+Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Entity() {
     
     //    glPolygonMode(GL_FRONT, GL_FILL);
     glColor3d(0.0, 0.0, 1.0);
-    mesh = new HipoMesh(20,200,7,4,2);
+    this-> nP = nP;
+    this-> nQ = nQ;
+    this-> a = aHipo;
+    this-> b = bHipo;
+    this-> c = cHipo;
+
+    mesh = new HipoMesh(nP,nQ,a,b,c);
     
-    //mesh->normalize(m, n);
-    
+    mesh->normalize(nQ, nP);
     
 }
 
@@ -427,36 +432,33 @@ void Hipotrocoide::draw(){
         glEnableClientState(GL_NORMAL_ARRAY);
         glVertexPointer(3, GL_DOUBLE, 0, vertices);
         glNormalPointer(GL_DOUBLE, 0, normals);
-        
         //        if (colors != nullptr) {
         //            glEnableClientState(GL_COLOR_ARRAY);
         //            glColorPointer(4, GL_DOUBLE, 0, colors);
-        //
         //        }
-        
         //if (normals != nullptr){
-        
-        
         // }
     }
-    
     // Después del dibujo de los elementos por índices,
     // se deshabilitan los vertex arrays, como es habitual
     //        ...
     // Definición de las caras
-    for (int i=0; i< nQ; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
-        for (int j=0; j<(nP-1); j++) { // Esquina inferior-izquierda de una cara
-            int indice = i*nP+j;
-            int stripIndices[] = {indice, (indice + nP) %(nQ*nP),(indice + nP + 1) %(nQ*nP), indice + 1};
+    for (int i=0; i < nQ - 1; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
+        for (int j=0; j< (nP-1); j++) { // Esquina inferior-izquierda de una cara
+            int indice = (i*nP) + j;
+            int stripIndices[] = {indice, (indice + 1),(indice + nP + 1), indice + nP};
             //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
-            glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
             // o GL_POLYGON, si se quiere las caras con relleno
         }
+        int indice = i * nP + (nP - 1);
+        int stripIndices[] = {indice, (indice - (nP - 1)),(indice + 1), indice + nP};
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
+
     }
     
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
-    
     
 }
 

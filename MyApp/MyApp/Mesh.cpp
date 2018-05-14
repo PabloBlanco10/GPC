@@ -269,7 +269,7 @@ void Mesh::normalize (int mm, int nn){
         normals[i] = dvec3(0,0,0);
     }*/
     // Se ponen al vector nulo todas las componentes de normals
-    for (int i = 0; i < nn; i++)
+    for (int i = 0; i < nn; i++){
         for (int j = 0; j < mm-1; j++) {
             int indice = i*mm + j;
             // Por cada cara a la que pertenece el vértice índice,
@@ -287,8 +287,8 @@ void Mesh::normalize (int mm, int nn){
             normals[i0] += norm;
             normals[i1] += norm;
             normals[i2] += norm;
-            
         }
+    }
     // Finalmente, se normalizan todos los vectores normales
     for (int i = 0; i < nn; i++){
         for(int j = 0; j < mm; j++){
@@ -303,16 +303,68 @@ void Mesh::normalize (int mm, int nn){
 
 HipoMesh::HipoMesh(int nP, int nQ, GLfloat a, GLfloat b, GLfloat c){
     
+    this-> nP = nP;
+    this-> nQ = nQ;
+    this-> a = a;
+    this-> b = b;
+    this-> c = c;
+    this->vertices = new dvec3[nP*nQ];
+    this->numVertices = nP*nQ;
+    
     creaBase();
     GLdouble t = 0.0;
     cargaMatriz(t);
     creaVerticesIniciales();
-    GLdouble saltoEntreRodajas = 8*3.1416/nQ;
-    for (int i = 1; i<nQ; i++) {
+    GLdouble saltoEntreRodajas = 8*3.1416/(nQ-1);
+    for (int i = 1; i < nQ; i++) {
         t += saltoEntreRodajas;
         cargaMatriz(t);
-        creaRodaja(t);
+        creaRodaja(i);
     }
+    
+}
+
+void HipoMesh::creaBase(){ //Guarda en base el polígono que aproxima la circunferencia del tubo
+    double inc=(2*3.1416/nP);
+    base = new dvec3[nP];
+    
+    for (int i=0; i<nP; i++)//¿¿{}
+        base[i]= glm::dvec3(r*cos(i*inc), r*sin(i*inc),0); // El uno, define un punto en la rodaja
+}
+
+void HipoMesh::creaVerticesIniciales(){//Añade los primeros nP vértices
+    creaRodaja(0);
+}
+
+void HipoMesh::creaRodaja(int v){//Añade nP nuevos vértices, a partir de la componente v
+    dvec4 *baseAux = new dvec4[nP];
+
+    for (int i=0; i<nP; i++){
+        baseAux[i] = glm::dvec4(base[i][0], base[i][1], base[i][2], 1);
+        vertices[i + v*nP] = multiplicar(m, baseAux[i]);
+     }
+}
+
+void HipoMesh::cargaMatriz(GLdouble t){//Define la matriz m para t
+    dvec3 vector_curva = curva(t);
+    dvec3 vector_primera_derivada = derivada(t);
+    dvec3 vector_segunda_derivada = segundaDerivada(t);
+    dvec3 vector_t = glm::normalize(vector_primera_derivada);
+    dvec3 vector_b = glm::normalize(glm::cross(vector_primera_derivada, vector_segunda_derivada));
+    dvec3 vector_n = glm::cross(vector_b, vector_t);
+    
+//    La transformación es la matriz 4×4 M(t)=(N(t), B(t), T(t), C(t))
+//    donde las tres primeras columnas son vectores y la última, punto.
+    for (int i = 0; i < 3; i++){
+        m[i][0] = vector_n[i];
+        m[i][1] = vector_b[i];
+        m[i][2] = vector_t[i];
+        m[i][3] = vector_curva[i];
+    }
+    m[3][0] = 0;
+    m[3][1] = 0;
+    m[3][2] = 0;
+    m[3][3] = 1;
     
 }
 
@@ -355,61 +407,20 @@ void HipoMesh::normalize (int nQ, int nP){
 }
 
 
-void HipoMesh::creaBase(){ //Guarda en base el polígono que aproxima la circunferencia del tubo
-    
-    double inc=(2*3.1416/nP);
-    
-    for (int i=0; i<nP; i++)//¿¿{}
-        base[i]= glm::dvec4(r*cos(i*inc), r*sin(i*inc),0, 1); // El uno, define un punto en la rodaja
-}
-
-void HipoMesh::creaVerticesIniciales(){//Añade los primeros nP vértices
-    
-    creaRodaja(0);
-}
-
-void HipoMesh::creaRodaja(int v){//Añade nP nuevos vértices, a partir de la componente v
-    
-    for (int i=0; i<nP; i++){
-         vertices[i + v*nP] = multiplicar(m, base[i]);
-     }
-}
-
-void HipoMesh::cargaMatriz(GLdouble t){//Define la matriz m para t
-    
-    //dvec3 vector_curva = curva(t);
-    dvec3 vector_primera_derivada = derivada(t);
-    dvec3 vector_segunda_derivada = segundaDerivada(t);
-    dvec3 vector_t = glm::normalize(vector_primera_derivada);
-    dvec3 vector_b = glm::normalize(glm::cross(vector_primera_derivada, vector_segunda_derivada));
-    dvec3 vector_n = glm::cross(vector_b, vector_t);
-
-    for(int i = 0; i < 3; i++){
-        m[i][0]= vector_n[i];
-        m[i][1]= vector_b[i];
-        m[i][2]= vector_t[i];
-    }
-    m[3][0] = 0;
-    m[3][1] = 0;
-    m[3][2] = 0;
-    m[3][3] = 1;
-    
-}
-
-dvec4 HipoMesh::multiplicar(dmat4 m, dvec4 columna){
+dvec3 HipoMesh::multiplicar(dmat4 m, dvec4 vertice){
     
     dvec4 vectAux;
     double totalCelda = 0;
-    for (int i =0; i< 3; i++){
-        for (int j = 0; j<4; j++){
-            totalCelda += m[i][j] * columna[j];
+    for (int i =0; i < 4; i++){
+        for (int j = 0; j < 4; j++){
+            totalCelda += m[i][j] * vertice[j];
         }
         vectAux[i] = totalCelda;
         totalCelda = 0;
     }
     
-    vectAux[3] = 1;//en la ultima posición del vector se pone 1 para indicar que es un punto no un vector
-    return vectAux;
+    //vectAux[3] = 1;//en la ultima posición del vector se pone 1 para indicar que es un punto no un vector
+    return dvec3(vectAux[0], vectAux[1], vectAux[2]);
 }
 
 dvec3 HipoMesh::curva(GLdouble t){
@@ -422,12 +433,14 @@ dvec3 HipoMesh::derivada(GLdouble t){
     return dvec3(- (a - b) * sin(t) - c * ((a - b) / b) * sin(t * ((a - b) / b )),
                  0,
                  (a - b) * cos(t) - c * ((a - b) / b) * cos(t * ((a - b) / b )));
+
 }
 
 dvec3 HipoMesh::segundaDerivada(GLdouble t){
     return dvec3(- (a - b) * cos(t) - c * ((a - b) / b) * ((a - b) / b) *  cos(t * ((a - b) / b )),
                  0,
                  - (a - b) * sin(t) - c * ((a - b) / b) * ((a - b) / b) * sin(t * ((a - b) / b )));
+    
 }
 
 

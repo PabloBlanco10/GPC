@@ -1,5 +1,6 @@
 #include "Scene.h"
-
+#include <gtc/matrix_transform.hpp>
+#include <gtc/type_ptr.hpp>
 //-------------------------------------------------------------------------
 
 
@@ -45,8 +46,16 @@ void Scene::init()
     //    objetos.push_back(new Grass(100.0));
     //10
     //    objetos.push_back(new GlassPot(200.0));
-    objetos.push_back(new MPR(20));
-    objetos.push_back(new Hipotrocoide());
+//    objetos.push_back(new MPR(20));
+    
+
+    int nP = 20;// Número de lados del polígono que aproxima la circunferencia que define el tubo
+    int nQ = 200;// Número de rodajas que forman la hipotrocoide
+    int aHipo = 7;
+    int bHipo = 4;
+    int cHipo = 2 ;
+    
+    objetos.push_back(new Hipotrocoide(nP, nQ, aHipo, bHipo, cHipo));
 
 }
 //-------------------------------------------------------------------------
@@ -153,7 +162,11 @@ void Scene::renderPractica2(){
     auto &it = objetos;
     //it[0]->render(camera->getViewMat());
     //it[1]->render(camera->getViewMat());
-    it[2]->render(camera->getViewMat());
+    glm::dmat4 viewMatAux = camera->getViewMat();  // inverse
+    viewMatAux = glm::scale(viewMatAux, glm::dvec3(50,50,50));
+//    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
+
+    it[1]->render(viewMatAux);
 }
 
 //-------------------------------------------------------------------------
