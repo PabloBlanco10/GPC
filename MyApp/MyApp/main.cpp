@@ -159,6 +159,9 @@ void key(unsigned char key, int x, int y)
         case 'p':
             camera.changeOrto();
             break;
+        case '1':
+            scene.movebb8();
+            break;
         default:
             need_redisplay = false;
             break;

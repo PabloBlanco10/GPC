@@ -367,13 +367,13 @@ MPR::MPR(int n) : Entity(){
     this->m = 100; //número de puntos del perfil //mm
     this->n = n;
     
-    
+    //PERFIL PARA EL CASCO DEL BB8
     int r = 20;
     dvec3* perfil = new dvec3[m];
     perfil[0] = dvec3(0, 0, 0);
     double angulo = 3.1416 /( 2 *( m - 3));
     
-    perfil[1] = dvec3(r*0.9 * cos(-3.1416/160),r*0.8 * sin(-3.1416/160), 0);
+    perfil[1] = dvec3(r*0.9 * cos(-3.1416/180),r*0.8 * sin(-3.1416/180), 0);
     
     for(int i = 2; i < m-2; i++){
         perfil[i] = dvec3(r * cos(angulo*i) ,r * sin(angulo*i) , 0);
@@ -424,10 +424,8 @@ void MPR::draw() {
             // o GL_POLYGON, si se quiere las caras con relleno
         }
     }
-    
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
-    
 }
 
 
@@ -446,7 +444,7 @@ Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Ent
     HipoMesh *hipomesh = new HipoMesh(nP,nQ,a,b,c);
     hipomesh->normalize(nQ, nP);
     mesh = hipomesh;
-    //    mesh->normalize(nQ, nP);
+//        mesh->normalize(nQ, nP);
     
 }
 

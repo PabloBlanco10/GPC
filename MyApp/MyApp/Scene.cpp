@@ -54,7 +54,12 @@ void Scene::init()
     int bHipo = 4;
     int cHipo = 2 ;
     
-    objetos.push_back(new Hipotrocoide(nP, nQ, aHipo, bHipo, cHipo));
+    Hipotrocoide * hipotrocoide = new Hipotrocoide(nP, nQ, aHipo, bHipo, cHipo);
+    hipotrocoide->gr = 0;
+    hipotrocoide->re = 0;
+    hipotrocoide->bl = 1.0;
+
+    objetos.push_back(hipotrocoide);
     
     ////////////////////////////////////////
 ////////////    BB8
@@ -65,49 +70,57 @@ void Scene::init()
     
     CompoundEntity* cabeza = new CompoundEntity(); // Cabeza
     bb8->entities.push_back(cabeza);
-
-    // Aquí se fija el color de la cabeza
     
     // Se sube la cabeza
     cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 40, 0));
     
     //semiesfera por revolucion
-    MPR * testa = new MPR(50); // Testa
-    testa->re = 1;
-    testa->gr = 1;
-    testa->bl = 1;
-    cabeza->entities.push_back(testa);
+    MPR * casco = new MPR(50); // Testa
+    casco->re = 1;
+    casco->gr = 1;
+    casco->bl = 1;
+    cabeza->entities.push_back(casco);
 
     
-    Sphere* ojo = new Sphere(2); //Ojo
+    Sphere* ojo = new Sphere(4); //Ojo
     ojo->re = 0;
     ojo->gr = 0;
     ojo->bl = 0;
     cabeza->entities.push_back(ojo);
-
-    ojo->modelMat = glm::translate(ojo->modelMat, glm::dvec3(14,14, 0));
     
+    ojo->modelMat = glm::rotate(ojo->modelMat, glm::radians(-90.0), glm::dvec3(0,1, 0));
+    ojo->modelMat = glm::translate(ojo->modelMat, glm::dvec3(14,10, 0));
     
-    CompoundEntity* cuerpo = new CompoundEntity(); // Cabeza
+    Sphere* boca = new Sphere(2); //Boca
+    boca->re = 0;
+    boca->gr = 0;
+    boca->bl = 0;
+    cabeza->entities.push_back(boca);
+    
+    boca->modelMat = glm::rotate(boca->modelMat, glm::radians(-45.0), glm::dvec3(0,1, 0));
+    boca->modelMat = glm::translate(boca->modelMat, glm::dvec3(17,8, 0));
+    
+    CompoundEntity* cuerpo = new CompoundEntity(); // cuerpo
     // Aquí se fija el color del cuerpo
     bb8->entities.push_back(cuerpo);
     
-    Sphere* panza = new Sphere(40); // Cuerpo
+    Sphere* panza = new Sphere(40); // Panza
     // Aquí se fija el color del cuerpo
     panza->re = 1;
-    panza->gr = 1;
-    panza->bl = 0.89;
+    panza->gr = 0.96;
+    panza->bl = 0.8;
     cuerpo->entities.push_back(panza);
     
 
-    Sphere* testigo = new Sphere(2); // testigo
+    Sphere* testigo = new Sphere(8); // testigo
     // Aquí se fija el color del testigo
     testigo->re = 0;
     testigo->gr = 0;
     testigo->bl = 0;
     cuerpo->entities.push_back(testigo);
     
-
+    testigo->modelMat = glm::rotate(testigo->modelMat, glm::radians(-75.0), glm::dvec3(0,1, 0));
+    testigo->modelMat = glm::translate(testigo->modelMat, glm::dvec3(33,8, 0));
 }
 //-------------------------------------------------------------------------
 
@@ -208,17 +221,34 @@ void Scene::rotarDiabolo(){
 }
 
 
+void Scene::movebb8(){
+    
+    for(auto &it: objetos){
+        //casteamos para comprobar si es de la clase Diabolo
+        if(dynamic_cast<Hipotrocoide*>(it) != nullptr){
+            //en caso de que sea de la clase Diabolo, llamamos a la funcion que lo rota
+//            glm::dmat4 viewMatAux = static_cast<Hipotrocoide*>(it)->getMatrix();
+            
+        }
+    }
+   
+    
+}
+
 
 void Scene::renderPractica2(){
     auto &it = objetos;
-    //it[0]->render(camera->getViewMat());
+    it[0]->render(camera->getViewMat());
     //it[1]->render(camera->getViewMat());
     glm::dmat4 viewMatAux = camera->getViewMat(); 
     viewMatAux = glm::scale(viewMatAux, glm::dvec3(50,50,50));
     //    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
     
-//    it[1]->render(viewMatAux);
-    it[2]->render(camera->getViewMat());
+    it[1]->render(viewMatAux);
+    viewMatAux = camera->getViewMat();
+    viewMatAux = glm::scale(viewMatAux, glm::dvec3(0.5,0.5,0.5));
+
+    it[2]->render(viewMatAux);
 }
 
 //-------------------------------------------------------------------------
