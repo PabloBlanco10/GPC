@@ -4,6 +4,8 @@
 
 #include <GL/freeglut.h>
 #include <glm.hpp>
+#include <vector>
+
 
 #include "Mesh.h"
 #include "Texture.h"
@@ -16,13 +18,18 @@ public:
     Entity() : modelMat(1.0) { };
     virtual ~Entity() { delete mesh; };
     virtual void render(glm::dmat4 const& modelViewMat);
-    
+    glm::dmat4 modelMat;
+    //colores
+    GLfloat re;
+    GLfloat gr;
+    GLfloat bl;
+
 protected:
     Mesh* mesh = nullptr;
-    glm::dmat4 modelMat;
     virtual void draw();
     virtual void setMvM(glm::dmat4 const& modelViewMat);
     Texture texture;
+
 };
 
 //-------------------------------------------------------------------------
@@ -148,6 +155,7 @@ protected:
     int n;
 //    glm::dvec3 * perfil;
 };
+
 class Hipotrocoide : public Entity
 {
 public:
@@ -156,13 +164,49 @@ public:
     virtual void draw();
 
 protected:
-
     int nP;
     int nQ;
     GLfloat a, b, c;
-   
 
 };
+
+class QuadricEntity : public Entity
+{
+public:
+//    QuadricEntity(GLdouble l);
+    ~QuadricEntity() { gluDeleteQuadric(q); };
+
+
+   
+protected:
+    GLUquadricObj *q;
+    GLdouble r;
+
+};
+
+
+class Sphere : public QuadricEntity
+{
+public:
+    Sphere(GLdouble l);
+    virtual void draw();
+    
+protected:
+    
+};
+
+
+
+class CompoundEntity : public Entity
+{
+public:
+    std::vector<Entity*> entities;
+    virtual void render(glm::dmat4 const& modelViewMat);
+    
+protected:
+    
+};
+
 //-------------------------------------------------------------------------
 
 #endif //_H_Entities_H_

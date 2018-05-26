@@ -6,10 +6,10 @@
 
 void Scene::init()
 { // OpenGL basic setting
-//    glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
+    //    glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
     glEnable(GL_DEPTH_TEST);
-//    glEnable(GL_TEXTURE_2D);
-//
+    //    glEnable(GL_TEXTURE_2D);
+    //
     glClearColor(0.6f, 0.7f, 0.8f, 1.0); // Fondo azul (o el que prefieras)
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHTING);
@@ -33,7 +33,7 @@ void Scene::init()
     // objets
     
     //0
-        objetos.push_back(new EjesRGB(350));
+    objetos.push_back(new EjesRGB(350));
     //    objetos.push_back(new Triangle(200.0));
     //    objetos.push_back(new TriangleRGB(200.0));
     //    objetos.push_back(new TriPyramid(200.0, 300.0));
@@ -46,9 +46,8 @@ void Scene::init()
     //    objetos.push_back(new Grass(100.0));
     //10
     //    objetos.push_back(new GlassPot(200.0));
-//    objetos.push_back(new MPR(20));
+    //    objetos.push_back(new MPR(20));
     
-
     int nP = 20;// Número de lados del polígono que aproxima la circunferencia que define el tubo
     int nQ = 200;// Número de rodajas que forman la hipotrocoide
     int aHipo = 7;
@@ -56,6 +55,53 @@ void Scene::init()
     int cHipo = 2 ;
     
     objetos.push_back(new Hipotrocoide(nP, nQ, aHipo, bHipo, cHipo));
+    
+    ////////////////////////////////////////
+////////////    BB8
+    ////////////////////////////////////////
+
+    CompoundEntity * bb8 = new CompoundEntity();
+    objetos.push_back(bb8);
+    
+    CompoundEntity* cabeza = new CompoundEntity(); // Cabeza
+    // Aquí se fija el color de la cabeza
+    glColor3d(0.0, 0.0, 0.0);
+    //semiesfera por revolucion
+    MPR * testa = new MPR(10);
+    cabeza->entities.push_back(testa);
+
+    // Se sube la cabeza
+    cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 30, 0));
+    
+    Sphere* ojo = new Sphere(2); // Cuerpo
+    // Aquí se fija el color del cuerpo
+    cabeza->entities.push_back(ojo);
+    ojo->re = 0;
+    ojo->gr = 0;
+    ojo->bl = 0;
+    
+    
+    CompoundEntity* cuerpo = new CompoundEntity(); // Cabeza
+    // Aquí se fija el color del cuerpo
+    bb8->entities.push_back(cuerpo);
+    
+    Sphere* panza = new Sphere(40); // Cuerpo
+    // Aquí se fija el color del cuerpo
+    panza->re = 0;
+    panza->gr = 0;
+    panza->bl = 0;
+    bb8->entities.push_back(panza);
+    
+
+    Sphere* testigo = new Sphere(2); // testigo
+    // Aquí se fija el color del testigo
+    testigo->re = 0;
+    testigo->gr = 0;
+    testigo->bl = 0;
+    bb8->entities.push_back(testigo);
+
+    
+    
 
 }
 //-------------------------------------------------------------------------
@@ -103,7 +149,7 @@ void Scene::render()
     //////////////////////////////
     //      PARA PRACTICA1
     //////////////////////////////
-//    renderScenario();
+    //    renderScenario();
     
     //////////////////////////////
     //      PARA CUBO CON TAPA
@@ -162,11 +208,12 @@ void Scene::renderPractica2(){
     auto &it = objetos;
     //it[0]->render(camera->getViewMat());
     //it[1]->render(camera->getViewMat());
-    glm::dmat4 viewMatAux = camera->getViewMat();  // inverse
+    glm::dmat4 viewMatAux = camera->getViewMat(); 
     viewMatAux = glm::scale(viewMatAux, glm::dvec3(50,50,50));
-//    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
-
+    //    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
+    
     it[1]->render(viewMatAux);
+    it[2]->render(camera->getViewMat());
 }
 
 //-------------------------------------------------------------------------

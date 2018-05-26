@@ -9,7 +9,7 @@
 
 //-------------------------------------------------------------------------
 
-class Scene	
+class Scene	: public CompoundEntity
 { 
 public:
     Scene(Camera * cam): camera(cam) { };

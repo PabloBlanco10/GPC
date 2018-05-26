@@ -15,7 +15,8 @@ void Entity::render(dmat4 const& modelViewMat)
 //-------------------------------------------------------------------------
 
 void Entity::draw() 
-{ 
+{
+    glColor3d(re, gr, bl);
     if (mesh != nullptr)
         mesh->draw();
 }
@@ -349,15 +350,44 @@ void Grass::render(const glm::dmat4 &modelViewMat){
     draw();
 }
 
-MPR::MPR(int n) {
+MPR::MPR(int n) : Entity(){
     //    glPolygonMode(GL_FRONT, GL_FILL);
     glColor3d(0.0, 0.0, 1.0);
-    this->m = 3; //número de puntos del perfil //mm
+    //    this->m = 3; //número de puntos del perfil //mm
+    //    this->n = n;
+    //    dvec3* perfil = new dvec3[m];
+    //    perfil[0] = dvec3(0, 0, 0);
+    //    perfil[1] = dvec3(20, 0, 0);
+    //    perfil[2] = dvec3(0, 50, 0);
+    
+    
+    this->m = 20; //número de puntos del perfil //mm
     this->n = n;
+    
+    
+    int r = 20;
     dvec3* perfil = new dvec3[m];
     perfil[0] = dvec3(0, 0, 0);
-    perfil[1] = dvec3(20, 0, 0);
-    perfil[2] = dvec3(0, 50, 0);
+    perfil[1] = dvec3(r, 0, 0);
+    perfil[2] = dvec3(r - ( r*0.0588 ), (r - (( r*0.0588 ) * 17)) , 0);
+    perfil[3] = dvec3(r - (( r*0.0588 ) * 2), (r - (( r*0.0588 ) * 16)), 0);
+    perfil[4] = dvec3(r - (( r*0.0588 ) * 3), (r - (( r*0.0588 ) * 15)), 0);
+    perfil[5] = dvec3(r - (( r*0.0588 ) * 4), (r - (( r*0.0588 ) * 14)), 0);
+    perfil[6] = dvec3(r - (( r*0.0588 ) * 5), (r - (( r*0.0588 ) * 13)), 0);
+    perfil[7] = dvec3(r - (( r*0.0588 ) * 6), (r - (( r*0.0588 ) * 12)), 0);
+    perfil[8] = dvec3(r - (( r*0.0588 ) * 7), (r - (( r*0.0588 ) * 11)), 0);
+    perfil[9] = dvec3(r - (( r*0.0588 ) * 8), (r - (( r*0.0588 ) * 10)), 0);
+    perfil[10] = dvec3(r - (( r*0.0588 ) * 9), (r - (( r*0.0588 ) * 9)), 0);
+    perfil[11] = dvec3(r - (( r*0.0588 ) * 10), (r - (( r*0.0588 ) * 8)), 0);
+    perfil[12] = dvec3(r - (( r*0.0588 ) * 11), (r - (( r*0.0588 ) * 7)), 0);
+    perfil[13] = dvec3(r - (( r*0.0588 ) * 12), (r - (( r*0.0588 ) * 6)), 0);
+    perfil[14] = dvec3(r - (( r*0.0588 ) * 13), (r - (( r*0.0588 ) * 5)), 0);
+    perfil[15] = dvec3(r - (( r*0.0588 ) * 14), (r - (( r*0.0588 ) * 4)), 0);
+    perfil[16] = dvec3(r - (( r*0.0588 ) * 15), (r - (( r*0.0588 ) * 3)), 0);
+    perfil[17] = dvec3(r - (( r*0.0588 ) * 16), (r - (( r*0.0588 ) * 2)), 0);
+    perfil[18] = dvec3(r - (( r*0.0588 ) * 17), r - ( r*0.0588 ), 0);
+    perfil[19] = dvec3(0, r, 0);
+    
     
     this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
     mesh->normalize(m, n);
@@ -374,19 +404,14 @@ void MPR::draw() {
         glEnableClientState(GL_NORMAL_ARRAY);
         glVertexPointer(3, GL_DOUBLE, 0, vertices);
         glNormalPointer(GL_DOUBLE, 0, normals);
-
-//        if (colors != nullptr) {
-//            glEnableClientState(GL_COLOR_ARRAY);
-//            glColorPointer(4, GL_DOUBLE, 0, colors);
-//
-//        }
-        
+        //        if (colors != nullptr) {
+        //            glEnableClientState(GL_COLOR_ARRAY);
+        //            glColorPointer(4, GL_DOUBLE, 0, colors);
+        //
+        //        }
         //if (normals != nullptr){
-        
-        
-       // }
+        // }
     }
-    
     // Después del dibujo de los elementos por índices,
     // se deshabilitan los vertex arrays, como es habitual
     //        ...
@@ -395,7 +420,7 @@ void MPR::draw() {
         for (int j=0; j<(m-1); j++) { // Esquina inferior-izquierda de una cara
             int indice = i*m+j;
             int stripIndices[] = {indice, (indice + m) %(n*m),(indice + m + 1) %(n*m), indice + 1};
-//            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
+            //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
             glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
             // o GL_POLYGON, si se quiere las caras con relleno
         }
@@ -403,8 +428,10 @@ void MPR::draw() {
     
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
-
+    
 }
+
+
 
 Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Entity() {
     
@@ -415,10 +442,12 @@ Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Ent
     this-> a = aHipo;
     this-> b = bHipo;
     this-> c = cHipo;
-
-    mesh = new HipoMesh(nP,nQ,a,b,c);
     
-    mesh->normalize(nQ, nP);
+    //    mesh = new HipoMesh(nP,nQ,a,b,c);
+    HipoMesh *hipomesh = new HipoMesh(nP,nQ,a,b,c);
+    hipomesh->normalize(nQ, nP);
+    mesh = hipomesh;
+    //    mesh->normalize(nQ, nP);
     
 }
 
@@ -448,17 +477,61 @@ void Hipotrocoide::draw(){
             int indice = (i*nP) + j;
             int stripIndices[] = {indice, (indice + 1),(indice + nP + 1), indice + nP};
             //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
-            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
+            glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
             // o GL_POLYGON, si se quiere las caras con relleno
         }
         int indice = i * nP + (nP - 1);
         int stripIndices[] = {indice, (indice - (nP - 1)),(indice + 1), indice + nP};
-        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
-
+        glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+        
     }
-    
     glDisableClientState(GL_VERTEX_ARRAY);
     glDisableClientState(GL_NORMAL_ARRAY);
-    
 }
+
+
+
+Sphere::Sphere(GLdouble l) :QuadricEntity(){
+    r = l;
+    q = gluNewQuadric();
+    //    gluQuadricTexture(sphere, GLU_TRUE);
+}
+
+void Sphere::draw()
+{
+    glColor3f(re, gr, bl);
+    // En la Práctica 2, el color se debe incorporar con tres
+    // atributos en Entity de tipo GLfloat o con un nuevo atributo de
+    // clase Color que tiene 3 atributos de tipo GLfloat
+    
+    gluQuadricDrawStyle(q, GLU_FILL);
+    gluSphere(q, r, 30, 30);
+    gluQuadricTexture(q, GLU_TRUE);
+
+    //    texture.bind();
+    gluSphere(q, r, r, r);
+    //    texture.unbind();
+    
+    //    mesh->draw();
+}
+
+
+void CompoundEntity::render(const glm::dmat4 &modelViewMat){
+    //    if (visible) {
+    //        ... // Se sitúa en la escena (post-)multiplicando
+    // por su matriz modelMat y se guarda el resultado en aMat // Se renderizan sus componentes con respecto a aMat
+    
+    glMatrixMode(GL_MODELVIEW);
+    dmat4 aMat = modelViewMat * modelMat;
+    glLoadMatrixd(value_ptr(aMat));
+    
+    //    for(auto &it : entities){
+    //        it->render(aMat);
+    //    }
+    //        for each (Entity* it in entities) {
+    //            it->render(aMat);
+    //        }
+    //    }
+}
+
 

@@ -328,7 +328,7 @@ void HipoMesh::creaBase(){ //Guarda en base el polígono que aproxima la circun
     double inc=(2*3.1416/nP);
     base = new dvec3[nP];
     
-    for (int i=0; i<nP; i++)//¿¿{}
+    for (int i=0; i<nP; i++)
         base[i]= glm::dvec3(r*cos(i*inc), r*sin(i*inc),0); // El uno, define un punto en la rodaja
 }
 
