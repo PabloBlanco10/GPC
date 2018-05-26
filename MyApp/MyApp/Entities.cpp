@@ -8,7 +8,8 @@ using namespace glm;
 //-------------------------------------------------------------------------
 
 void Entity::render(dmat4 const& modelViewMat) 
-{ 
+{
+    glColor3d(re, gr, bl);
     setMvM(modelViewMat);
     draw();
 }
@@ -16,7 +17,6 @@ void Entity::render(dmat4 const& modelViewMat)
 
 void Entity::draw() 
 {
-    glColor3d(re, gr, bl);
     if (mesh != nullptr)
         mesh->draw();
 }
@@ -373,9 +373,9 @@ MPR::MPR(int n) : Entity(){
     perfil[0] = dvec3(0, 0, 0);
     double angulo = 3.1416 /( 2 *( m - 3));
     
-    perfil[1] = dvec3(r * cos(-3.1416/160),r * sin(-3.1416/160), 0);
+    perfil[1] = dvec3(r*0.9 * cos(-3.1416/160),r*0.8 * sin(-3.1416/160), 0);
     
-    for(int i = 2; i < m-1; i++){
+    for(int i = 2; i < m-2; i++){
         perfil[i] = dvec3(r * cos(angulo*i) ,r * sin(angulo*i) , 0);
     }
 
