@@ -121,6 +121,11 @@ void Scene::init()
     
     testigo->modelMat = glm::rotate(testigo->modelMat, glm::radians(-75.0), glm::dvec3(0,1, 0));
     testigo->modelMat = glm::translate(testigo->modelMat, glm::dvec3(33,8, 0));
+    
+    //lo escalamos para que encaje en la hipotrocoide
+    bb8->modelMat = glm::scale(bb8->modelMat,glm::dvec3(0.008,0.008, 0.008));
+    
+    t = 0;
 }
 //-------------------------------------------------------------------------
 
@@ -221,34 +226,34 @@ void Scene::rotarDiabolo(){
 }
 
 
-void Scene::movebb8(){
+void Scene::moverbb8(){
+    Hipotrocoide *hipotrocoide = (Hipotrocoide*)objetos[1];
+    HipoMesh *hipomesh = hipotrocoide->getHipoMesh();
+    glm::dmat4 matrix = hipomesh->getM(t);
     
-    for(auto &it: objetos){
-        //casteamos para comprobar si es de la clase Diabolo
-        if(dynamic_cast<Hipotrocoide*>(it) != nullptr){
-            //en caso de que sea de la clase Diabolo, llamamos a la funcion que lo rota
-//            glm::dmat4 viewMatAux = static_cast<Hipotrocoide*>(it)->getMatrix();
-            
-        }
-    }
-   
+    matrix = glm::scale(matrix, glm::dvec3(0.008,0.008, 0.008));
+    matrix = glm::rotate(matrix, glm::radians(180.0), glm::dvec3(0, 0, 1));
     
+    CompoundEntity* bb8 = (CompoundEntity*) objetos[2];
+    
+    bb8->entities.at(1)->modelMat = glm::rotate(bb8->entities.at(1)->modelMat, glm::radians(10.0), glm::dvec3(1, 0, 0));
+    
+    objetos[2]->modelMat = matrix;
+    t += 0.1;
 }
 
 
 void Scene::renderPractica2(){
+    //escalamos para verlo mas grande
+    camera->setScale(50, 50, 50);
+
     auto &it = objetos;
     it[0]->render(camera->getViewMat());
-    //it[1]->render(camera->getViewMat());
-    glm::dmat4 viewMatAux = camera->getViewMat(); 
-    viewMatAux = glm::scale(viewMatAux, glm::dvec3(50,50,50));
-    //    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
+    it[1]->render(camera->getViewMat());
+    it[2]->render(camera->getViewMat());
     
-    it[1]->render(viewMatAux);
-    viewMatAux = camera->getViewMat();
-    viewMatAux = glm::scale(viewMatAux, glm::dvec3(0.5,0.5,0.5));
-
-    it[2]->render(viewMatAux);
+    //volvemos para no perder la relacion 1/50
+    camera->setScale(0.02, 0.02, 0.02);
 }
 
 //-------------------------------------------------------------------------

@@ -52,7 +52,8 @@ public:
     
     void setSize(GLdouble aw, GLdouble ah);
     void scale(GLdouble s);
-    
+    void setScale(GLdouble x, GLdouble y, GLdouble z);
+
     
 	void moveLR(GLdouble cs); // Left / Right
 	void moveFB(GLdouble cs); // Forward / Backward
@@ -66,13 +67,13 @@ public:
 
     void rotatePY(GLdouble offsetP,GLdouble offsetY);
     void rotateRoll(GLdouble offsetR);
+    glm::dmat4 viewMat;  // inverse
 
 
 protected:
     glm::dvec3 eye = { 0.0, 0.0, 500.0 };
     glm::dvec3 look = { 0.0, 0.0, 0.0 };
     glm::dvec3 up = { 0.0, 1.0, 0.0 };
-    glm::dmat4 viewMat;  // inverse
     
 //    dvec3 front, right; // front = -n y right = u
     glm::dvec3 front, right;

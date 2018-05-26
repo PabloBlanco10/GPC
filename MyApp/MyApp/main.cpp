@@ -160,7 +160,7 @@ void key(unsigned char key, int x, int y)
             camera.changeOrto();
             break;
         case '1':
-            scene.movebb8();
+            scene.moverbb8();
             break;
         default:
             need_redisplay = false;

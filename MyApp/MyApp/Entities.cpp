@@ -448,6 +448,10 @@ Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Ent
     
 }
 
+HipoMesh * Hipotrocoide::getHipoMesh(){
+    return (HipoMesh*) this->mesh;
+}
+
 void Hipotrocoide::draw(){
     
     dvec3* vertices = mesh->getVertices();
@@ -474,12 +478,12 @@ void Hipotrocoide::draw(){
             int indice = (i*nP) + j;
             int stripIndices[] = {indice, (indice + 1),(indice + nP + 1), indice + nP};
             //            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
-            glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+            glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
             // o GL_POLYGON, si se quiere las caras con relleno
         }
         int indice = i * nP + (nP - 1);
         int stripIndices[] = {indice, (indice - (nP - 1)),(indice + 1), indice + nP};
-        glDrawElements(GL_POLYGON, 4, GL_UNSIGNED_INT, stripIndices);
+        glDrawElements(GL_LINE_LOOP, 4, GL_UNSIGNED_INT, stripIndices);
         
     }
     glDisableClientState(GL_VERTEX_ARRAY);

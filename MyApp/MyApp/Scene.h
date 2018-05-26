@@ -17,7 +17,7 @@ public:
     void init();
     void render();
     void rotarDiabolo();
-    void movebb8();
+    void moverbb8();
     void divideViewPort();
     void renderDiaboloWithAxes();
     void renderCubeWithAxes();
@@ -30,6 +30,7 @@ public:
 protected:
     Camera * camera;
     std::vector<Entity*> objetos;
+    GLdouble t;
 };
 
 //-------------------------------------------------------------------------

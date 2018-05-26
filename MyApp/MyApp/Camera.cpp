@@ -103,6 +103,13 @@ void Camera::scale(GLdouble s)
 }
 //-------------------------------------------------------------------------
 
+
+
+void Camera::setScale(GLdouble x, GLdouble y, GLdouble z)
+{
+    this->viewMat = glm::scale(this->viewMat, dvec3(x, y, z));
+}
+
 void Camera::setSize(GLdouble aw, GLdouble ah) 
 {
     xRight = aw / 2.0;

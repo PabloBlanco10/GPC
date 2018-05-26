@@ -56,6 +56,7 @@ public:
     glm::dvec3 curva(GLdouble t);
     glm::dvec3 derivada(GLdouble t);
     glm::dvec3 segundaDerivada(GLdouble t);
+    glm::dmat4 getM(GLdouble t);
     void creaBase();
     void creaVerticesIniciales();
     void creaRodaja(int v);

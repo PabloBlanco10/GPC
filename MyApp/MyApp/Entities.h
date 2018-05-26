@@ -162,6 +162,7 @@ public:
     Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo);
     ~Hipotrocoide() { };
     virtual void draw();
+    HipoMesh * getHipoMesh();
 //    virtual void getMatrix(){return modelMat};
 
 protected:

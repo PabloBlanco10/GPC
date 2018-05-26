@@ -443,6 +443,33 @@ dvec3 HipoMesh::segundaDerivada(GLdouble t){
     
 }
 
+glm::dmat4 HipoMesh::getM(GLdouble t){
+    dmat4 matrix;
+    
+    dvec3 vector_curva = curva(t);
+    dvec3 vector_primera_derivada = derivada(t);
+    dvec3 vector_segunda_derivada = segundaDerivada(t);
+    dvec3 vector_t = glm::normalize(vector_primera_derivada);
+    dvec3 vector_b = glm::normalize(glm::cross(vector_primera_derivada, vector_segunda_derivada));
+    dvec3 vector_n = glm::cross(vector_b, vector_t);
+    
+    //    La transformación es la matriz 4×4 M(t)=(N(t), B(t), T(t), C(t))
+    //    donde las tres primeras columnas son vectores y la última, punto.
+    for (int i = 0; i < 3; i++){
+        matrix[i][0] = vector_n[i];
+        matrix[i][1] = vector_b[i];
+        matrix[i][2] = vector_t[i];
+        matrix[3][i] = vector_curva[i];
+    }
+    matrix[0][3] = 0;
+    matrix[1][3] = 0;
+    matrix[2][3] = 0;
+    matrix[3][3] = 1;
+    
+    return matrix;
+}
+
+
 
 //dvec3 HipoMesh::cargaN(dvec3 v){
 //
