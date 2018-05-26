@@ -65,21 +65,33 @@ void Scene::init()
     
     CompoundEntity* cabeza = new CompoundEntity(); // Cabeza
     // Aquí se fija el color de la cabeza
-    glColor3d(0.0, 0.0, 0.0);
+//    glColor3d(1.0, 1.0, 1.0);
+    cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 40, 0));
+
+    
     //semiesfera por revolucion
-    MPR * testa = new MPR(10);
+    double r = 50;
+    MPR * testa = new MPR(r); // Testa
     cabeza->entities.push_back(testa);
 
-    // Se sube la cabeza
-    cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 30, 0));
+    testa->re = 1;
+    testa->gr = 1;
+    testa->bl = 1;
+
     
-    Sphere* ojo = new Sphere(2); // Cuerpo
-    // Aquí se fija el color del cuerpo
+    Sphere* ojo = new Sphere(2); //Ojo
     cabeza->entities.push_back(ojo);
+
     ojo->re = 0;
     ojo->gr = 0;
     ojo->bl = 0;
+    ojo->modelMat = glm::translate(ojo->modelMat, glm::dvec3(r-r*0.1, r*0.1, 0));
     
+
+
+    // Se sube la cabeza
+    bb8->entities.push_back(cabeza);
+
     
     CompoundEntity* cuerpo = new CompoundEntity(); // Cabeza
     // Aquí se fija el color del cuerpo
@@ -87,10 +99,10 @@ void Scene::init()
     
     Sphere* panza = new Sphere(40); // Cuerpo
     // Aquí se fija el color del cuerpo
-    panza->re = 0;
-    panza->gr = 0;
-    panza->bl = 0;
-    bb8->entities.push_back(panza);
+    panza->re = 1;
+    panza->gr = 1;
+    panza->bl = 0.89;
+    cuerpo->entities.push_back(panza);
     
 
     Sphere* testigo = new Sphere(2); // testigo
@@ -98,9 +110,7 @@ void Scene::init()
     testigo->re = 0;
     testigo->gr = 0;
     testigo->bl = 0;
-    bb8->entities.push_back(testigo);
-
-    
+    cuerpo->entities.push_back(testigo);
     
 
 }
@@ -212,7 +222,7 @@ void Scene::renderPractica2(){
     viewMatAux = glm::scale(viewMatAux, glm::dvec3(50,50,50));
     //    modelMat = rotate(modelMat, radians(45.0), dvec3(0.0,0.0,1.0));
     
-    it[1]->render(viewMatAux);
+//    it[1]->render(viewMatAux);
     it[2]->render(camera->getViewMat());
 }
 
