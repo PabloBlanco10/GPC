@@ -515,3 +515,31 @@ void CompoundEntity::render(const glm::dmat4 &modelViewMat){
 }
 
 
+Cylinder::Cylinder(GLdouble bR, GLdouble tR, GLdouble h) :QuadricEntity(){
+    //r = l;
+    q = gluNewQuadric();
+    //    gluQuadricTexture(sphere, GLU_TRUE);
+    
+    this->br = bR;
+    this->tr = tR;
+    this->h = h;
+}
+
+void Cylinder::draw()
+{
+    glColor3f(re, gr, bl);
+    // En la Práctica 2, el color se debe incorporar con tres
+    // atributos en Entity de tipo GLfloat o con un nuevo atributo de
+    // clase Color que tiene 3 atributos de tipo GLfloat
+    
+    gluQuadricDrawStyle(q, GLU_FILL);
+    gluCylinder(q, br, tr, h, 30, 30);
+    gluQuadricTexture(q, GLU_TRUE);
+    
+    //    texture.bind();
+    gluCylinder(q, br, tr, h, 30, 30);
+    //    texture.unbind();
+    
+    //    mesh->draw();
+}
+

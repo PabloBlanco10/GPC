@@ -127,6 +127,20 @@ void Scene::init()
     bb8->modelMat = glm::scale(bb8->modelMat,glm::dvec3(0.008,0.008, 0.008));
     
     t = 0;
+    
+    ////////////////////
+    ////CILINDRO////////
+    ////////////////////
+    
+    Cylinder* cilindro = new Cylinder(2.0,0.0, 7.0); //Nariz radioBase, radioTop, altura
+    cilindro->re = 0;
+    cilindro->gr = 0;
+    cilindro->bl = 0;
+    cabeza->entities.push_back(cilindro);
+    //cilindro->modelMat = glm::rotate(cilindro->modelMat, glm::radians(-75.0), glm::dvec3(0,1, 0));
+    cilindro->modelMat = glm::translate(cilindro->modelMat, glm::dvec3(90,85, 100));
+    
+    
 }
 //-------------------------------------------------------------------------
 

@@ -178,6 +178,7 @@ public:
 protected:
     GLUquadricObj *q;
     GLdouble r;
+    GLdouble br, tr, h;
 
 };
 
@@ -195,6 +196,12 @@ public:
     SemiSphere(GLdouble l);
 };
 
+class Cylinder :public QuadricEntity
+{
+public:
+    Cylinder(GLdouble bR, GLdouble tR, GLdouble h);
+    virtual void draw();
+};
 
 class CompoundEntity : public Entity
 {
