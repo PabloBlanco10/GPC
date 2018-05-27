@@ -251,6 +251,7 @@ void Scene::moverbb8(){
     HipoMesh *hipomesh = hipotrocoide->getHipoMesh();
     glm::dmat4 matrix = hipomesh->getM(t);
     
+    //lo escalamos para que encaje en la hipotrocoide como al crearlo
     matrix = glm::scale(matrix, glm::dvec3(0.008,0.008, 0.008));
     matrix = glm::rotate(matrix, glm::radians(180.0), glm::dvec3(0, 0, 1));
     
