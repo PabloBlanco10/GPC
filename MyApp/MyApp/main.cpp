@@ -31,6 +31,8 @@ void display();
 void resize(int newWidth, int newHeight);
 void key(unsigned char key, int x, int y);
 void specialKey(int key, int x, int y);
+void sueltaKey(unsigned char key, int x, int y);
+
 
 void mouse(int button, int state, int x, int y);
 void motion(int x, int y);
@@ -67,6 +69,7 @@ int main(int argc, char *argv[])
 
     glutMouseFunc(mouse);
     glutMotionFunc(motion);
+    glutKeyboardUpFunc(sueltaKey);
 
     
     cout << glGetString(GL_VERSION) << '\n';
@@ -217,4 +220,20 @@ void motion(int x, int y){
     glutPostRedisplay();
 }
 
-
+//evento al soltar la tecla
+void sueltaKey(unsigned char key, int x, int y)
+{
+    bool need_redisplay = true;
+    switch (key) {
+        case '1':
+            scene.moverCabezabb8();
+            break;
+        default:
+            need_redisplay = false;
+            break;
+    }//switch
+    
+    
+    if (need_redisplay)
+        glutPostRedisplay();
+}

@@ -101,6 +101,18 @@ void Scene::init()
     boca->modelMat = glm::rotate(boca->modelMat, glm::radians(-45.0), glm::dvec3(0,1, 0));
     boca->modelMat = glm::translate(boca->modelMat, glm::dvec3(17,8, 0));
     
+    
+    ////////////////////
+    ////CILINDRO////////
+    ////////////////////
+    Cylinder* cilindro = new Cylinder(2.0, 0.0, 7.0); //Nariz radioBase, radioTop, altura
+    cilindro->re = 0;
+    cilindro->gr = 0;
+    cilindro->bl = 0;
+    cabeza->entities.push_back(cilindro);
+    cilindro->modelMat = glm::translate(cilindro->modelMat, glm::dvec3(7,9, 15));
+    
+    
     CompoundEntity* cuerpo = new CompoundEntity(); // cuerpo
     // Aquí se fija el color del cuerpo
     bb8->entities.push_back(cuerpo);
@@ -127,19 +139,6 @@ void Scene::init()
     bb8->modelMat = glm::scale(bb8->modelMat,glm::dvec3(0.008,0.008, 0.008));
     
     t = 0;
-    
-    ////////////////////
-    ////CILINDRO////////
-    ////////////////////
-    
-    Cylinder* cilindro = new Cylinder(2.0,0.0, 7.0); //Nariz radioBase, radioTop, altura
-    cilindro->re = 0;
-    cilindro->gr = 0;
-    cilindro->bl = 0;
-    cabeza->entities.push_back(cilindro);
-    //cilindro->modelMat = glm::rotate(cilindro->modelMat, glm::radians(-75.0), glm::dvec3(0,1, 0));
-    cilindro->modelMat = glm::translate(cilindro->modelMat, glm::dvec3(90,85, 100));
-    
     
 }
 //-------------------------------------------------------------------------
@@ -240,6 +239,12 @@ void Scene::rotarDiabolo(){
     }
 }
 
+void Scene::moverCabezabb8(){
+    //vuelve la cabeza al sitio
+    CompoundEntity* bb8 = (CompoundEntity*) objetos[2];
+    bb8->entities[0]->modelMat = glm::rotate(bb8->entities[0]->modelMat, glm::radians(-20.0), glm::dvec3(1, 0, 0));
+}
+
 
 void Scene::moverbb8(){
     Hipotrocoide *hipotrocoide = (Hipotrocoide*)objetos[1];
@@ -251,7 +256,12 @@ void Scene::moverbb8(){
     
     CompoundEntity* bb8 = (CompoundEntity*) objetos[2];
     
-    bb8->entities[1]->modelMat = glm::rotate(bb8->entities.at(1)->modelMat, glm::radians(10.0), glm::dvec3(1, 0, 0));
+    //cuerpo
+    bb8->entities[1]->modelMat = glm::rotate(bb8->entities[1]->modelMat, glm::radians(10.0), glm::dvec3(1, 0, 0));
+    
+    //cabeza
+    bb8->entities[0]->modelMat = glm::rotate(bb8->entities[0]->modelMat, glm::radians(20.0), glm::dvec3(1, 0, 0));
+
     
     objetos[2]->modelMat = matrix;
     t += 0.1;

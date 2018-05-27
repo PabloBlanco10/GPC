@@ -18,6 +18,7 @@ public:
     void render();
     void rotarDiabolo();
     void moverbb8();
+    void moverCabezabb8();
     void divideViewPort();
     void renderDiaboloWithAxes();
     void renderCubeWithAxes();
