@@ -265,10 +265,7 @@ Mesh * Mesh::generaMallaPorRevolucion(int m, int n, glm::dvec3* perfil){
 
 void Mesh::normalize (int mm, int nn){
     normals = new dvec3[numVertices];
-    /*for(int i = 0; i < mm*nn; i++){
-        normals[i] = dvec3(0,0,0);
-    }*/
-    // Se ponen al vector nulo todas las componentes de normals
+
     for (int i = 0; i < nn; i++){
         for (int j = 0; j < mm-1; j++) {
             int indice = i*mm + j;
@@ -321,7 +318,9 @@ HipoMesh::HipoMesh(int nP, int nQ, GLfloat a, GLfloat b, GLfloat c){
         cargaMatriz(t);
         creaRodaja(i);
     }
-    
+    glEnable(GL_NORMALIZE);
+    glEnable(GL_RESCALE_NORMAL);
+    normalize(nQ, nP);
 }
 
 void HipoMesh::creaBase(){ //Guarda en base el polígono que aproxima la circunferencia del tubo
@@ -370,10 +369,7 @@ void HipoMesh::cargaMatriz(GLdouble t){//Define la matriz m para t
 
 void HipoMesh::normalize (int nQ, int nP){
     normals = new dvec3[numVertices];
-    /*for(int i = 0; i < mm*nn; i++){
-     normals[i] = dvec3(0,0,0);
-     }*/
-    // Se ponen al vector nulo todas las componentes de normals
+
     for (int i = 0; i < nQ; i++)
         for (int j = 0; j < nP-1; j++) {
             int indice = i*nP + j;
@@ -384,15 +380,14 @@ void HipoMesh::normalize (int nQ, int nP){
             int i2 = indice + 1;
             
             dvec3 aux0 = vertices[indice];//vértice de i0;
-            dvec3 aux1 = vertices[i0];
-            dvec3 aux2 = vertices[i1];
+            dvec3 aux1 = vertices[i1];
+            dvec3 aux2 = vertices[i2];
             
-            dvec3 norm = glm::cross(aux2 - aux1, aux0 - aux1);
+            dvec3 norm = glm::cross(aux1 - aux2, aux0 - aux2);
             normals[indice] += norm;
-            normals[i0] += norm;
             normals[i1] += norm;
             normals[i2] += norm;
-            
+            normals[i0] += norm;
         }
     // Finalmente, se normalizan todos los vectores normales
     for (int i = 0; i < nQ; i++){
@@ -400,6 +395,9 @@ void HipoMesh::normalize (int nQ, int nP){
             normals[i * nP + j] = glm::normalize(normals[i * nP + j]);
         }
     }
+//    for(int i = 0; i < nP * nQ; i++){
+//        normals[i] = normals[i] * 50.0;
+//    }
     //    for(int i = 0; i < mm*nn; i++){
     //        normals[i] = glm::normalize(normals[i]);
     //    }
@@ -453,8 +451,8 @@ glm::dmat4 HipoMesh::getM(GLdouble t){
     dvec3 vector_b = glm::normalize(glm::cross(vector_primera_derivada, vector_segunda_derivada));
     dvec3 vector_n = glm::cross(vector_b, vector_t);
     
-    //    La transformación es la matriz 4×4 M(t)=(N(t), B(t), T(t), C(t))
-    //    donde las tres primeras columnas son vectores y la última, punto.
+//    (N B T | 0)
+//    ( C(T) | 1)
     for (int i = 0; i < 3; i++){
         matrix[i][0] = vector_n[i];
         matrix[i][1] = vector_b[i];

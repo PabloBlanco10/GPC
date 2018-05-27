@@ -148,12 +148,10 @@ public:
     MPR(int n);
     ~MPR() { };
     virtual void draw();
-//    virtual void normalize();
-//    virtual void render(glm::dmat4 const& modelViewMat);
+
 protected:
     int m;
     int n;
-//    glm::dvec3 * perfil;
 };
 
 class Hipotrocoide : public Entity
@@ -163,7 +161,6 @@ public:
     ~Hipotrocoide() { };
     virtual void draw();
     HipoMesh * getHipoMesh();
-//    virtual void getMatrix(){return modelMat};
 
 protected:
     int nP;
@@ -178,8 +175,6 @@ public:
 //    QuadricEntity(GLdouble l);
     ~QuadricEntity() { gluDeleteQuadric(q); };
 
-
-   
 protected:
     GLUquadricObj *q;
     GLdouble r;
@@ -192,11 +187,13 @@ class Sphere : public QuadricEntity
 public:
     Sphere(GLdouble l);
     virtual void draw();
-    
-protected:
-    
 };
 
+class SemiSphere : public MPR
+{
+public:
+    SemiSphere(GLdouble l);
+};
 
 
 class CompoundEntity : public Entity
@@ -204,9 +201,6 @@ class CompoundEntity : public Entity
 public:
     std::vector<Entity*> entities;
     virtual void render(glm::dmat4 const& modelViewMat);
-    
-protected:
-    
 };
 
 //-------------------------------------------------------------------------

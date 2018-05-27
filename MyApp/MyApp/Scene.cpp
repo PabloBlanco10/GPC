@@ -8,19 +8,21 @@ void Scene::init()
 { // OpenGL basic setting
     //    glClearColor(1.0, 1.0, 1.0, 1.0);  // background color (alpha=1 -> opaque)
     glEnable(GL_DEPTH_TEST);
+//    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     //    glEnable(GL_TEXTURE_2D);
     //
     glClearColor(0.6f, 0.7f, 0.8f, 1.0); // Fondo azul (o el que prefieras)
     glEnable(GL_COLOR_MATERIAL);
     glEnable(GL_LIGHTING);
     glEnable(GL_LIGHT0); // Light0
+    
     GLfloat d[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glLightfv(GL_LIGHT0, GL_DIFFUSE, d);
     GLfloat a[] = { 0.3f, 0.3f, 0.3f, 1.0f };
     glLightfv(GL_LIGHT0, GL_AMBIENT, a);
     GLfloat s[] = { 1.0f, 1.0f, 1.0f, 1.0f };
     glLightfv(GL_LIGHT0, GL_SPECULAR, s);
-    GLfloat p[] = { 50.0f, 50.0f, 50.0f, 1.0f };
+    GLfloat p[] = { 1000.0f, 1000.0f, 1000.0f, 1.0f };
     glLightfv(GL_LIGHT0, GL_POSITION, p);
     camera->set3D();
     
@@ -72,16 +74,15 @@ void Scene::init()
     bb8->entities.push_back(cabeza);
     
     // Se sube la cabeza
-    cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 40, 0));
+    cabeza->modelMat=glm::translate(cabeza->modelMat, glm::dvec3(0, 37, 0));
     
     //semiesfera por revolucion
-    MPR * casco = new MPR(50); // Testa
+    SemiSphere * casco = new SemiSphere(50); // Casco
     casco->re = 1;
     casco->gr = 1;
     casco->bl = 1;
     cabeza->entities.push_back(casco);
 
-    
     Sphere* ojo = new Sphere(4); //Ojo
     ojo->re = 0;
     ojo->gr = 0;
@@ -106,9 +107,9 @@ void Scene::init()
     
     Sphere* panza = new Sphere(40); // Panza
     // Aquí se fija el color del cuerpo
-    panza->re = 1;
-    panza->gr = 0.96;
-    panza->bl = 0.8;
+    panza->re = 0.98;
+    panza->gr = 0.81;
+    panza->bl = 0.74;
     cuerpo->entities.push_back(panza);
     
 
@@ -236,7 +237,7 @@ void Scene::moverbb8(){
     
     CompoundEntity* bb8 = (CompoundEntity*) objetos[2];
     
-    bb8->entities.at(1)->modelMat = glm::rotate(bb8->entities.at(1)->modelMat, glm::radians(10.0), glm::dvec3(1, 0, 0));
+    bb8->entities[1]->modelMat = glm::rotate(bb8->entities.at(1)->modelMat, glm::radians(10.0), glm::dvec3(1, 0, 0));
     
     objetos[2]->modelMat = matrix;
     t += 0.1;

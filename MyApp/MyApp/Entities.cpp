@@ -351,43 +351,16 @@ void Grass::render(const glm::dmat4 &modelViewMat){
 }
 
 MPR::MPR(int n) : Entity(){
-    //    glPolygonMode(GL_FRONT, GL_FILL);
-//    glColor3d(1.0, 1.0, 1.0);
-
+    //    glPolygonMode(GL_FRONT, GL_FILL);    
     glColor3f(re, gr, bl);
-
-    //    this->m = 3; //número de puntos del perfil //mm
-    //    this->n = n;
-    //    dvec3* perfil = new dvec3[m];
-    //    perfil[0] = dvec3(0, 0, 0);
-    //    perfil[1] = dvec3(20, 0, 0);
-    //    perfil[2] = dvec3(0, 50, 0);
     
-    
-    this->m = 100; //número de puntos del perfil //mm
+    this->m = 3; //número de puntos del perfil //mm
     this->n = n;
-    
-    //PERFIL PARA EL CASCO DEL BB8
-    int r = 20;
     dvec3* perfil = new dvec3[m];
     perfil[0] = dvec3(0, 0, 0);
-    double angulo = 3.1416 /( 2 *( m - 3));
+    perfil[1] = dvec3(20, 0, 0);
+    perfil[2] = dvec3(0, 50, 0);
     
-    perfil[1] = dvec3(r*0.9 * cos(-3.1416/180),r*0.8 * sin(-3.1416/180), 0);
-    
-    for(int i = 2; i < m-2; i++){
-        perfil[i] = dvec3(r * cos(angulo*i) ,r * sin(angulo*i) , 0);
-    }
-
-//    double angulo = M_PI / (2 * (this->m - 3));
-//    perfil[0] = dvec3(0.0, 0.0, 0.0);
-//    perfil[1] = dvec3(r*cos(-M_PI / 160), r*sin(-M_PI / 160), 0.0);
-//    for(int i = 2; i < this->m-1; i++){
-//        perfil[i] = dvec3(r*cos(angulo*i), r*sin(angulo*i), 0.0);
-//    }
-    
-    
-    perfil[m-1] = dvec3(0, r, 0);
     this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
     mesh->normalize(m, n);
 }
@@ -403,13 +376,6 @@ void MPR::draw() {
         glEnableClientState(GL_NORMAL_ARRAY);
         glVertexPointer(3, GL_DOUBLE, 0, vertices);
         glNormalPointer(GL_DOUBLE, 0, normals);
-        //        if (colors != nullptr) {
-        //            glEnableClientState(GL_COLOR_ARRAY);
-        //            glColorPointer(4, GL_DOUBLE, 0, colors);
-        //
-        //        }
-        //if (normals != nullptr){
-        // }
     }
     // Después del dibujo de los elementos por índices,
     // se deshabilitan los vertex arrays, como es habitual
@@ -431,7 +397,6 @@ void MPR::draw() {
 
 
 Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Entity() {
-    
     //    glPolygonMode(GL_FRONT, GL_FILL);
     glColor3d(0.0, 0.0, 1.0);
     this-> nP = nP;
@@ -440,12 +405,8 @@ Hipotrocoide::Hipotrocoide(int nP,int nQ, int aHipo, int bHipo, int cHipo) : Ent
     this-> b = bHipo;
     this-> c = cHipo;
     
-    //    mesh = new HipoMesh(nP,nQ,a,b,c);
     HipoMesh *hipomesh = new HipoMesh(nP,nQ,a,b,c);
-    hipomesh->normalize(nQ, nP);
     mesh = hipomesh;
-//        mesh->normalize(nQ, nP);
-    
 }
 
 HipoMesh * Hipotrocoide::getHipoMesh(){
@@ -453,10 +414,10 @@ HipoMesh * Hipotrocoide::getHipoMesh(){
 }
 
 void Hipotrocoide::draw(){
-    
     dvec3* vertices = mesh->getVertices();
     //dvec4* colors = mesh->getColours();
     dvec3* normals = mesh-> getNormals();
+    
     if (vertices != nullptr) {
         glEnableClientState(GL_VERTEX_ARRAY);
         glEnableClientState(GL_NORMAL_ARRAY);
@@ -471,7 +432,6 @@ void Hipotrocoide::draw(){
     }
     // Después del dibujo de los elementos por índices,
     // se deshabilitan los vertex arrays, como es habitual
-    //        ...
     // Definición de las caras
     for (int i=0; i < nQ - 1; i++){ // Unir el perfil i-ésimo con el (i+1)%n-ésimo
         for (int j=0; j< (nP-1); j++) { // Esquina inferior-izquierda de una cara
@@ -490,7 +450,26 @@ void Hipotrocoide::draw(){
     glDisableClientState(GL_NORMAL_ARRAY);
 }
 
-
+SemiSphere::SemiSphere(GLdouble l) : MPR(l){
+    this->m = 100; //número de puntos del perfil //mm
+    this->n = n;
+    
+    //PERFIL PARA EL CASCO DEL BB8
+    int r = 20;
+    dvec3* perfil = new dvec3[m];
+    perfil[0] = dvec3(0, 0, 0);
+    double angulo = 3.1416 /( 2 *( m - 3));
+    
+    perfil[1] = dvec3(r*0.9 * cos(-3.1416/180),r*0.8 * sin(-3.1416/180), 0);
+    
+    for(int i = 2; i < m-2; i++){
+        perfil[i] = dvec3(r * cos(angulo*i) ,r * sin(angulo*i) , 0);
+    }
+    
+    perfil[m-1] = dvec3(0, r, 0);
+    this->mesh = Mesh::generaMallaPorRevolucion(m, n, perfil);
+    mesh->normalize(m, n);
+}
 
 Sphere::Sphere(GLdouble l) :QuadricEntity(){
     r = l;
